@@ -14,8 +14,10 @@ public class Blast {
     public static double blastComparisonPonderation(char[] referenceSequence, char[] querySequence) {
         int coincidences = 0; //Counts the elements that match
         int changesRequired = 0; //Counts the ammounts of blocks of mismatches.
-        boolean lastElementWasEqual = false;
+        boolean lastElementWasEqual = true;
 
+        //char[] qry = {'a', 'g', 'c','t','t','t'};
+        //char[] ref = {'u', 'g', 'g','t','a','t'};
         for (int i = 0; i < referenceSequence.length; i++) {
             if (referenceSequence[i] == querySequence[i]){
                 coincidences++;
@@ -25,7 +27,10 @@ public class Blast {
                 lastElementWasEqual = false;
             }
         }
-        return (((double)coincidences/referenceSequence.length) * 0.8 + (1 - (double)changesRequired/referenceSequence.length) * 0.2) * 100;
+        if(coincidences == 0){
+            return 0;
+        }
+        return (((double)coincidences/referenceSequence.length) * 0.8 + (1 - (double)changesRequired/((double)referenceSequence.length/2)) * 0.2) * 100;
     }
 
 }
