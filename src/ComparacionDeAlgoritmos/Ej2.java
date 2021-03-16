@@ -37,9 +37,8 @@ public class Ej2 {
     }
 
     public static void insertionSort(int[] a){ //
-        int key;
-        int j;
-        for (int i = 1; i < a.length-1; i++) {
+        int key, j;
+        for (int i = 1; i < a.length; i++) {
             key = a[i];
             j = i-1;
             while(j >= 0 && a[j] > key){ // if j is a valid array index (not out of bounds) and the element in J that is before the key is greater than the key, it changes their places.
@@ -73,10 +72,10 @@ public class Ej2 {
     //----String sorts-----
     //d)
     public static void selectionSort(String[] a) {
-        for (int i = 0; i < a.length - 1; i++) { //loops the array and saves the position in the index variable
+        for (int i = 0; i < a.length-1; i++) { //loops the array and saves the position in the index variable
             int index = i;
-            for (int j = 0; j < a.length; j++) { //loops and if an element is smaller than the one in the indexv puts the smaller element index in the inddex variable
-                if (a[j].compareTo(a[index]) > 0) {
+            for (int j = i+1; j < a.length; j++) { //loops and if an element is smaller than the one in the indexv puts the smaller element index in the inddex variable
+                if (a[j].compareTo(a[index]) < 0) {
                     index = j;
                 }
             }
@@ -90,7 +89,7 @@ public class Ej2 {
     public static void insertionSort(String[] a){ //
         String key;
         int j;
-        for (int i = 1; i < a.length-1; i++) {
+        for (int i = 1; i < a.length; i++) {
             key = a[i];
             j = i-1;
             while(j >= 0 && a[j].compareTo(key) > 0){ // if j is a valid array index (not out of bounds) and the element in J that is before the key is greater than the key, it changes their places.
@@ -117,10 +116,10 @@ public class Ej2 {
     //--Generic Sorts-----
     //e)
     public static <T> void selectionSort(Comparable <T> a[]) {
-        for (int i = 0; i < a.length - 1; i++) { //loops the array and saves the position in the index variable
+        for (int i = 0; i < a.length-1; i++) { //loops the array and saves the position in the index variable
             int index = i;
             for (int j = i+1; j < a.length; j++) { //loops and if an element is smaller than the one in the indexv puts the smaller element index in the inddex variable
-                if (a[j].compareTo((T) a[index]) > 0) {
+                if (a[j].compareTo((T) a[index]) < 0) {
                     index = j;
                 }
             }
@@ -135,7 +134,7 @@ public class Ej2 {
     public static <T> void insertionSort(Comparable <T> a[]){ //
         T key;
         int j;
-        for (int i = 1; i < a.length-1; i++) {
+        for (int i = 1; i < a.length; i++) {
             key = (T) a[i];
             j = i-1;
 

@@ -10,6 +10,7 @@ public class Ej2Test {
     int n2 = 100;
     int n3 = 100000;
 //Integer Sorts
+
     @Test
     public void selectionSort(){
         int[] array = {5,3,1,2,7,6,4};
@@ -58,9 +59,9 @@ public class Ej2Test {
     }
     @Test
     public void selectionSortString(){
-        String[] array = {"df", "lm", "abc", "ghi", "jk","AA"};
+        String[] array = {"df", "lm", "abc", "ghi", "jk","aa"};
         Ej2.selectionSort(array);
-        String[] sortedArray = {"AA", "abc", "df", "ghi", "jk", "lm"};
+        String[] sortedArray = {"aa", "abc", "df", "ghi", "jk", "lm"};
         for (int i = 0; i < array.length; i++) {
             assertEquals(sortedArray[i],array[i]);
         }
