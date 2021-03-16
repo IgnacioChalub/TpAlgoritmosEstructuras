@@ -50,9 +50,9 @@ public class Ej2Test {
     }
     @Test
     public void insertionSortString(){
-        String[] array = {"df", "lm", "abc", "ghi", "jk","AA"};
+        String[] array = {"df", "lm", "abc", "ghi", "jk","aa"};
         Ej2.insertionSort(array);
-        String[] sortedArray = {"AA", "abc", "df", "ghi", "jk", "lm"};
+        String[] sortedArray = {"aa", "abc", "df", "ghi", "jk", "lm"};
         for (int i = 0; i < array.length; i++) {
             assertEquals(sortedArray[i],array[i]);
         }

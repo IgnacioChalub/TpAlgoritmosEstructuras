@@ -47,7 +47,6 @@ public class Ej2 {
             }
             a[j + 1] = key;
         }
-
     }
     public static void bubbleSort(int[] a){
         for (int i = 0; i < a.length-1; i++) {//the value of i marks the current iteration
@@ -80,9 +79,9 @@ public class Ej2 {
                 }
             }
             //swaps the smaller element with the element in the index position
-            String smallerElement = a[index];
+            String smallerString = a[index];
             a[index] = a[i];
-            a[i] = smallerElement;
+            a[i] = smallerString;
         }
     }
 
