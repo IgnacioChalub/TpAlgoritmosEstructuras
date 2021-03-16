@@ -2,7 +2,7 @@ package ComparacionDeAlgoritmos;
 
 public class Ej1 {
 
-    public static <T> int BinarySearch(Comparable <T> a[], Comparable <T> k){
+    public static <T> int binarySearch(Comparable <T> a[], Comparable <T> k){
     int min = 0;
     int max = a.length-1;
     int middle = (min+max)/2;
@@ -20,7 +20,7 @@ public class Ej1 {
     return -1;
     }
 
-    public static <T> int SeqSearch (Comparable<T> a[], Comparable<T> k) {
+    public static <T> int seqSearch (Comparable<T> a[], Comparable<T> k) {
         for (int i = 0; i < a.length; i++)
             if (k.compareTo((T)a[i]) == 0){
                 return i;
