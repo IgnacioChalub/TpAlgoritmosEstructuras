@@ -161,43 +161,32 @@ public class Ej2 {
         }
     }
     //g)
-
-    public static void recursiveSelectionSort(int[] a){
+    public static <T> void recursiveSelectionSort(Comparable<T> a[]){
         recursiveSelectionSort(a, 0);
     }
 
-    public static void recursiveSelectionSort(int[] a, int index){
+    public static <T> void recursiveSelectionSort(Comparable<T> a[], int index){
         if(index == a.length){
             return;
         }
         int j = index+1;
         int smallestElementIndex = smallestElementIndex(a, j, index);
-        int smallerElement = a[smallestElementIndex];
+        T smallerElement = (T) a[smallestElementIndex];
         a[smallestElementIndex] = a[index];
-        a[index] = smallerElement;
+        a[index] = (Comparable<T>) smallerElement;
         index++;
         recursiveSelectionSort(a, index);
     }
 
-    public static int smallestElementIndex(int[] a, int j, int minIndex){
+    public static <T> int smallestElementIndex(Comparable<T> a[], int j, int minIndex){
       if(j == a.length){
           return minIndex;
       }
-      if(a[minIndex] > a[j]){
+      if(a[minIndex].compareTo((T) a[j]) > 0){ //a[minIndex] > a[j]
           minIndex = j;
       }
       j++;
       return smallestElementIndex(a, j, minIndex);
     }
-
-    public static void main(String[] args) {
-        int[] array = { 12, 1, 334, 2, 1, 3};
-        recursiveSelectionSort(array);
-        for (int i = 0; i < array.length; i++) {
-            System.out.println(array[i]);
-        }
-    }
-
-
 
 }
