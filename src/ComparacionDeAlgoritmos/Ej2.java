@@ -42,7 +42,6 @@ public class Ej2 {
         for (int i = 1; i < a.length-1; i++) {
             key = a[i];
             j = i-1;
-
             while(j >= 0 && a[j] > key){ // if j is a valid array index (not out of bounds) and the element in J that is before the key is greater than the key, it changes their places.
                 a[j+1] = a[j]; //
                 j = j-1;
@@ -73,7 +72,7 @@ public class Ej2 {
 
     //----String sorts-----
     //d)
-    public void selectionSort(String[] a) {
+    public static void selectionSort(String[] a) {
         for (int i = 0; i < a.length - 1; i++) { //loops the array and saves the position in the index variable
             int index = i;
             for (int j = 0; j < a.length; j++) { //loops and if an element is smaller than the one in the indexv puts the smaller element index in the inddex variable
@@ -88,7 +87,7 @@ public class Ej2 {
         }
     }
 
-    public void insertionSort(String[] a){ //
+    public static void insertionSort(String[] a){ //
         String key;
         int j;
         for (int i = 1; i < a.length-1; i++) {
@@ -103,7 +102,7 @@ public class Ej2 {
 
     }
 
-    public void bubbleSort(String[] a){
+    public static void bubbleSort(String[] a){
         for (int i = 0; i < a.length-1; i++) {//the value of i marks the current iteration
             for (int j = 0; j < a.length-1-i; j++) {//the value of j marks the position in the array which is comparing with j+1. The for goes up to length-1-i
                 if(a[j].compareTo(a[j+1]) > 0){//if the element on the left is grater than the one on the right, it swaps the positions. If not, it continues.
@@ -117,7 +116,7 @@ public class Ej2 {
 
     //--Generic Sorts-----
     //e)
-    public <T> void selectionSort(Comparable <T> a[]) {
+    public static <T> void selectionSort(Comparable <T> a[]) {
         for (int i = 0; i < a.length - 1; i++) { //loops the array and saves the position in the index variable
             int index = i;
             for (int j = i+1; j < a.length; j++) { //loops and if an element is smaller than the one in the indexv puts the smaller element index in the inddex variable
@@ -133,7 +132,7 @@ public class Ej2 {
     }
 
 
-    public <T> void insertionSort(Comparable <T> a[]){ //
+    public static <T> void insertionSort(Comparable <T> a[]){ //
         T key;
         int j;
         for (int i = 1; i < a.length-1; i++) {
@@ -149,7 +148,7 @@ public class Ej2 {
 
     }
 
-    public <T> void bubbleSort(Comparable<T> a[]){
+    public static <T> void bubbleSort(Comparable<T> a[]){
         for (int i = 0; i < a.length-1; i++) {//the value of i marks the current iteration
             for (int j = 0; j < a.length-1-i; j++) {//the value of j marks the position in the array which is comparing with j+1. The for goes up to length-1-i
                 if(a[j].compareTo((T) a[j+1]) > 0){//if the element on the left is grater than the one on the right, it swaps the positions. If not, it continues.
@@ -165,7 +164,7 @@ public class Ej2 {
         recursiveSelectionSort(a, 0);
     }
 
-    public static <T> void recursiveSelectionSort(Comparable<T> a[], int index){
+    private static <T> void recursiveSelectionSort(Comparable<T> a[], int index){ //Selective sort Auxiliary
         if(index == a.length){
             return;
         }
@@ -178,7 +177,7 @@ public class Ej2 {
         recursiveSelectionSort(a, index);
     }
 
-    public static <T> int smallestElementIndex(Comparable<T> a[], int j, int minIndex){
+    private static <T> int smallestElementIndex(Comparable<T> a[], int j, int minIndex){//Selective sort Auxiliary
       if(j == a.length){
           return minIndex;
       }

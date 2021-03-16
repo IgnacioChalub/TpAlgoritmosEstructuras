@@ -29,17 +29,6 @@ public class Ej3 {
         }
         return newArray;
     }
-
-    public static void main(String[] args) {
-        String[] arrayA = {"a","c","g","z"};
-        String[] arrayB = {"b","i"};
-        String[] newArray = new String[arrayA.length+arrayB.length];
-        String[] arrayC = (String[]) mergeArrays(newArray, arrayA, arrayB);
-        for (int i = 0; i < arrayC.length; i++) {
-            System.out.println(arrayC[i]);
-        }
-    }
-
     public static int[] mergeArrays(int[] arrayA, int[] arrayB){
         int[] newArray = new int[arrayA.length + arrayB.length];
         int a = 0, b = 0, i = 0;
