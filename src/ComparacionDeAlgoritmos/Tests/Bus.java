@@ -1,6 +1,6 @@
 package ComparacionDeAlgoritmos.Tests;
 
-public class Bus implements Comparable<Bus>{ //Objet for testing the sort methods in ej2
+public class Bus implements Comparable<Bus>{ //Objet for testing the comparable obj sort methods in ej2
     int line;
     int capacity;
     int number;
