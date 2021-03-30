@@ -69,12 +69,18 @@ public class Main{
         System.out.println(api.height(t5)+ " 3");
 
         System.out.println("__________");
-        System.out.println(api.compareTrees(t7,t7Copy));
-        System.out.println(api.compareTrees(t7,t7FalseCopy));
+        System.out.println(api.compareTrees(t7,t7Copy) + " True");
+        System.out.println(api.compareTrees(t7,t7FalseCopy) + " False");
 
         System.out.println("__________");
         System.out.println(api.sumElements(i1) + " 21");
         System.out.println(api.sumElementsThreeMultiple(i1) + " 9");
+
+        System.out.println("__________");
+        System.out.println(api.isomorph(t7,t7) + " True");
+        System.out.println(api.isomorph(t5,t7) + " False");
+
+
     }
 
 }

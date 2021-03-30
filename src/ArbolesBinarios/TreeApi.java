@@ -107,7 +107,7 @@ public class TreeApi <T>{ //Metodos que vimos en clase
         ArrayList<T> t2Elements = new ArrayList<T>();
         inorden(t1, t1Elements);
         inorden(t2, t2Elements);
-        if(t1Elements.size() != t2Elements.size()){
+        if(t1Elements.size() != t2Elements.size() || !isomorph(t1,t2)){
             return false;
         }
         for (int i = 0; i < t1Elements.size(); i++) {
@@ -115,7 +115,36 @@ public class TreeApi <T>{ //Metodos que vimos en clase
                 return false;
             }
         }
-        return true;
+       return true;
     }
+
+    //intento de mejorar el compareTrees
+    /*public boolean compareTrees(BinaryTree<T> t1, BinaryTree<T> t2){
+        if(t1.getRoot() != null && t2.getRoot() != null ){
+            if(!t1.getRoot().equals(t2.getRoot())){
+               return false;
+            }
+        }
+        if(t1.getLeft() == null && t2.getLeft() == null && t1.getRight() == null && t2.getRight() == null){
+            return true;
+        }
+        return compareTrees(t1.getLeft(), t2.getLeft()) && compareTrees(t1.getRight(), t2.getRight());
+    }*/
+
+    public boolean isomorph(BinaryTree<T> t1, BinaryTree<T> t2){
+        if((t1.isEmpty() && !t2.isEmpty()) || (!t1.isEmpty() && t2.isEmpty())){
+            return false;
+        }
+        if(t1.isEmpty() && t2.isEmpty()){
+            return true;
+        }
+        return isomorph(t1.getLeft(), t2.getLeft()) && isomorph(t1.getRight(), t2.getRight());
+    }
+
+    public boolean areSimilar(BinaryTree<T> t1, BinaryTree<T> t2){
+        return false;
+    }
+
+
 }
 
