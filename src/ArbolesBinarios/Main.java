@@ -16,9 +16,9 @@ public class Main{
 
         BinaryTree <Book> t1 = new BinaryTree<Book>( l7);
 
-        BinaryTree <Book> t2 = new BinaryTree<Book>( l5);
+        BinaryTree <Book> t2 = new BinaryTree<Book>(l5);
 
-        BinaryTree <Book> t3 = new BinaryTree<Book>( l6,t1,t2);
+        BinaryTree <Book> t3 = new BinaryTree<Book>(l6,t1,t2);
 
         BinaryTree <Book> t4 = new BinaryTree<Book>( l4, t3,t2);
 
@@ -80,6 +80,11 @@ public class Main{
         System.out.println(api.isomorph(t7,t7) + " True");
         System.out.println(api.isomorph(t5,t7) + " False");
 
+        System.out.println("__________");
+        System.out.println(api.isComplete(t1));
+        System.out.println(api.isComplete(t3));
+        System.out.println(api.isComplete(t4));
+        System.out.println(api.isComplete(t5));
 
     }
 
