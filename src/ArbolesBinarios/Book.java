@@ -1,6 +1,6 @@
 package ArbolesBinarios;
 
-public class Book {
+public class Book implements Comparable {
     private int code;
     private String title;
     private int pages;
@@ -38,5 +38,11 @@ public class Book {
     @Override
     public String toString() {
         return "Libro [code= " + code + ", title= " + title + ", pages = "+ pages + "]";
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        Book aBook = (Book) o;
+        return code - aBook.getCode();
     }
 }

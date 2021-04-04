@@ -10,7 +10,7 @@ public class Main{
         Book l4 = new Book(75, "Romeo y Julieta", 199);
         Book l5 = new Book(56, "La isla del tesoro", 452);
         Book l6 = new Book(64, "El anillo", 520);
-        Book l7 = new Book(44, "El doctor Zhivago", 930);
+        Book l7 = new Book(90, "El doctor Zhivago", 930);
 
         TreeApi<Book> api = new TreeApi<Book>();
 
@@ -18,7 +18,7 @@ public class Main{
 
         BinaryTree <Book> t2 = new BinaryTree<Book>(l5);
 
-        BinaryTree <Book> t3 = new BinaryTree<Book>(l6,t1,t2);
+        BinaryTree <Book> t3 = new BinaryTree<Book>(l6,t1,new BinaryTree<Book>());
 
         BinaryTree <Book> t4 = new BinaryTree<Book>( l4, t3,t2);
 
@@ -30,7 +30,7 @@ public class Main{
 
         BinaryTree <Book> t7Copy = new BinaryTree<>(l1,t5,t6);
 
-        BinaryTree <Book> t7FalseCopy = new BinaryTree<>(l1,t5,new BinaryTree<>());
+        BinaryTree <Book> t7FalseCopy = new BinaryTree<>(l1,t5,new BinaryTree<Book>());
 
         BinaryTree<Integer> i1 = new BinaryTree<>(3,new BinaryTree<Integer>(5,new BinaryTree<Integer>(6),new BinaryTree<>()),new BinaryTree<Integer>(2,new BinaryTree<Integer>(1),new BinaryTree<>(4)));
 
@@ -86,6 +86,21 @@ public class Main{
         System.out.println(api.isComplete(t4));
         System.out.println(api.isComplete(t5));
 
+        System.out.println("__________");
+        System.out.println(api.areSimilar(t1,t2));
+        System.out.println(api.areSimilar(t7,t7Copy));
+
+        System.out.println("__________");
+        System.out.println(api.isFull(t1));
+        System.out.println(api.isFull(t3));
+        System.out.println(api.isFull(t4));
+        System.out.println(api.isFull(t5));
+
+        System.out.println("__________");
+        System.out.println(api.isEstable(t1));
+        System.out.println(api.isEstable(t3));
+        System.out.println(api.isEstable(t4));
+        System.out.println(api.isEstable(t5));
     }
 
 }

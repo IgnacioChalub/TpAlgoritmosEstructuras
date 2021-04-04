@@ -1,8 +1,9 @@
 package ArbolesBinarios;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class TreeApi <T> { //Metodos que vimos en clase
+public class TreeApi <T extends Comparable> { //Metodos que vimos en clase
     //-----------------IMPLEMENTADOS EN CLASE----------------------------------------
 
     public int size(BinaryTree<T> a) {
@@ -150,16 +151,34 @@ public class TreeApi <T> { //Metodos que vimos en clase
         return isomorph(t1.getLeft(), t2.getLeft()) && isomorph(t1.getRight(), t2.getRight());
     }
 
-    public boolean areSimilar(BinaryTree<T> t1, BinaryTree<T> t2) {
-
+    public boolean areSimilar(BinaryTree<T> t1, BinaryTree<T> t2){
+        if(size(t1) != size(t2)){
+            return false;
+        }
+        ArrayList<T> t1Elements = new ArrayList<T>();
+        inorden(t1, t1Elements);
+        int similarElements = areSimilar(t1Elements, t2);
+        if(similarElements == t1Elements.size()){
+            return true;
+        }
         return false;
+    }
+
+    private int areSimilar(List t1Elements, BinaryTree<T> t2) {
+       if(t2.isEmpty()){
+           return 0;
+       }
+       if(t1Elements.contains(t2.getRoot())){
+           return 1 + areSimilar(t1Elements,t2.getLeft()) + areSimilar(t1Elements, t2.getRight());
+       }
+       return 0;
     }
 
     public boolean isComplete(BinaryTree<T> a) {
         if (a.isEmpty()) {
-            return true;
+            return false;
         }
-        if (a.getLeft().isEmpty() && a.getRight().isEmpty() || !a.getLeft().isEmpty() && !a.getRight().isEmpty()) {
+        if(a.getRight().isEmpty() && a.getLeft().isEmpty()){
             return true;
         }
         if (a.getLeft().isEmpty() && !a.getRight().isEmpty() || !a.getLeft().isEmpty() && a.getRight().isEmpty()) {
@@ -167,5 +186,37 @@ public class TreeApi <T> { //Metodos que vimos en clase
         }
         return isComplete(a.getLeft()) && isComplete(a.getRight());
     }
+
+    public boolean isFull(BinaryTree<T> t1){
+        if(Math.pow(2,height(t1)) == elementsInLevel(t1, height(t1))){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean isEstable(BinaryTree<T> t1){
+        if(t1.isEmpty() || size(t1) == 1){
+            return true;
+        }
+        return isEstableAux(t1);
+    }
+
+    private boolean isEstableAux(BinaryTree<T> t1){
+        if(t1.getRight().isEmpty() && t1.getLeft().isEmpty()){
+            return true;
+        }
+        if(t1.getRight().isEmpty()){
+            return isEstableAux(t1.getLeft());
+        }
+        if(t1.getLeft().isEmpty()){
+            return isEstableAux(t1.getRight());
+        }
+        if(t1.getRoot().compareTo(t1.getLeft().getRoot()) < 0 && t1.getRoot().compareTo(t1.getRight().getRoot()) < 0){
+            return false;
+        }
+        return isEstableAux(t1.getLeft()) && isEstableAux(t1.getRight());
+
+    }
+
 }
 

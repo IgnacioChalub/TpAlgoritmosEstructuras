@@ -1,6 +1,6 @@
 package ArbolesBinarios;
 
-public class BinaryTree<T>{
+public class BinaryTree<T extends Comparable>{
     private DoubleNode<T> root;
 
     public BinaryTree() {
