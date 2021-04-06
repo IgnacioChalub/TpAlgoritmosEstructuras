@@ -14,7 +14,7 @@ public class Main{
 
         TreeApi<Book> api = new TreeApi<Book>();
 
-        BinaryTree <Book> t1 = new BinaryTree<Book>( l7);
+        BinaryTree <Book> t1 = new BinaryTree<Book>(l7);
 
         BinaryTree <Book> t2 = new BinaryTree<Book>(l5);
 
@@ -69,8 +69,8 @@ public class Main{
         System.out.println(api.height(t5)+ " 3");
 
         System.out.println("__________");
-        System.out.println(api.compareTrees(t7,t7Copy) + " True");
-        System.out.println(api.compareTrees(t7,t7FalseCopy) + " False");
+        System.out.println(api.equals(t7,t7Copy) + " True");
+        System.out.println(api.equals(t7,t7FalseCopy) + " False");
 
         System.out.println("__________");
         System.out.println(api.sumElements(i1) + " 21");
@@ -85,7 +85,7 @@ public class Main{
         System.out.println(api.isComplete(t3));
         System.out.println(api.isComplete(t4));
         System.out.println(api.isComplete(t5));
-
+        System.out.println(api.isComplete(new BinaryTree<Book>()));
         System.out.println("__________");
         System.out.println(api.areSimilar(t1,t2));
         System.out.println(api.areSimilar(t7,t7Copy));
@@ -102,5 +102,4 @@ public class Main{
         System.out.println(api.isEstable(t4));
         System.out.println(api.isEstable(t5));
     }
-
 }

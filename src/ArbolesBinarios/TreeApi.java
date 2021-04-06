@@ -111,35 +111,18 @@ public class TreeApi <T extends Comparable> { //Metodos que vimos en clase
         }
         return sumElementsThreeMultiple(a.getLeft()) + sumElementsThreeMultiple(a.getRight());
     }
-
-    public boolean compareTrees(BinaryTree<T> t1, BinaryTree<T> t2) {
-        ArrayList<T> t1Elements = new ArrayList<T>();
-        ArrayList<T> t2Elements = new ArrayList<T>();
-        inorden(t1, t1Elements);
-        inorden(t2, t2Elements);
-        if (t1Elements.size() != t2Elements.size() || !isomorph(t1, t2)) {
+    public boolean equals(BinaryTree<T> t1, BinaryTree<T> t2) {
+        if ((t1.isEmpty() && !t2.isEmpty()) || (!t1.isEmpty() && t2.isEmpty())) {
             return false;
         }
-        for (int i = 0; i < t1Elements.size(); i++) {
-            if (!t1Elements.get(i).equals(t2Elements.get(i))) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    //intento de mejorar el compareTrees
-    /*public boolean compareTrees(BinaryTree<T> t1, BinaryTree<T> t2){
-        if(t1.getRoot() != null && t2.getRoot() != null ){
-            if(!t1.getRoot().equals(t2.getRoot())){
-               return false;
-            }
-        }
-        if(t1.getLeft() == null && t2.getLeft() == null && t1.getRight() == null && t2.getRight() == null){
+        if (t1.isEmpty() && t2.isEmpty()) {
             return true;
         }
-        return compareTrees(t1.getLeft(), t2.getLeft()) && compareTrees(t1.getRight(), t2.getRight());
-    }*/
+        if(t1.getRoot().equals(t2.getRoot())){
+            return equals(t1.getLeft(),t2.getLeft()) && equals(t1.getRight(), t2.getRight());
+        }
+        return false;
+    }
 
     public boolean isomorph(BinaryTree<T> t1, BinaryTree<T> t2) {
         if ((t1.isEmpty() && !t2.isEmpty()) || (!t1.isEmpty() && t2.isEmpty())) {
@@ -151,29 +134,9 @@ public class TreeApi <T extends Comparable> { //Metodos que vimos en clase
         return isomorph(t1.getLeft(), t2.getLeft()) && isomorph(t1.getRight(), t2.getRight());
     }
 
-    public boolean areSimilar(BinaryTree<T> t1, BinaryTree<T> t2){
-        if(size(t1) != size(t2)){
-            return false;
-        }
-        ArrayList<T> t1Elements = new ArrayList<T>();
-        inorden(t1, t1Elements);
-        int similarElements = areSimilar(t1Elements, t2);
-        if(similarElements == t1Elements.size()){
-            return true;
-        }
-        return false;
+    public boolean areSimilar(BinaryTree<T> t1, BinaryTree<T> t2) {
+        return (size(t1) == size(t2)) && included(t1,t2);
     }
-
-    private int areSimilar(List t1Elements, BinaryTree<T> t2) {
-       if(t2.isEmpty()){
-           return 0;
-       }
-       if(t1Elements.contains(t2.getRoot())){
-           return 1 + areSimilar(t1Elements,t2.getLeft()) + areSimilar(t1Elements, t2.getRight());
-       }
-       return 0;
-    }
-
     public boolean isComplete(BinaryTree<T> a) {
         if (a.isEmpty()) {
             return false;
@@ -215,7 +178,15 @@ public class TreeApi <T extends Comparable> { //Metodos que vimos en clase
             return false;
         }
         return isEstableAux(t1.getLeft()) && isEstableAux(t1.getRight());
-
+    }
+    public boolean included(BinaryTree<T> t1, BinaryTree<T> t2){ // verifica si t2 esta incluido en t2
+        if(t1.isEmpty()){
+            return true;
+        }
+        if(ocurrencias(t2,t1.getRoot()) == 1){
+            return included(t1.getLeft(), t2) && included(t1.getRight(), t2);
+        }
+        return false;
     }
 
 }

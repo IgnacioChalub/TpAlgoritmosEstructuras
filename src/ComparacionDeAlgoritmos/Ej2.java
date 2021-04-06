@@ -1,6 +1,6 @@
 package ComparacionDeAlgoritmos;
 
-public class Ej2 {
+public class Ej2{
     /* DESCRIPCIONES
      a)
      Selection Sort: El algoritmo busca el elemento mas chico de  la parte desordenada del arreglo, y lo pone al final
