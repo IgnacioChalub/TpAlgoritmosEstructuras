@@ -124,6 +124,10 @@ public class Main{
         System.out.println("__________");
         api.showFrontier(t7);
 
-
+        ArrayList<Book> bookArrayList = new ArrayList<>();
+        api.frontier(t7,bookArrayList);
+        for (int i = 0; i < bookArrayList.size(); i++) {
+            System.out.println(bookArrayList.get(i).getTitle());
+        }
     }
 }

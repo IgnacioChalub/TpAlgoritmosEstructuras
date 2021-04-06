@@ -1,6 +1,7 @@
 package ArbolesBinarios;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class TreeApi <T extends Comparable> { //Metodos que vimos en clase
     //-----------------IMPLEMENTADOS EN CLASE----------------------------------------
@@ -209,14 +210,25 @@ public class TreeApi <T extends Comparable> { //Metodos que vimos en clase
 
     public void showFrontier(BinaryTree<T> t1){//prints all the elements stored in leaves
         if(t1.isEmpty()){
+    public void showFrontier(BinaryTree<T> t){
+        if(t.isEmpty()){
             return;
         }
-        if(t1.getLeft().isEmpty() && t1.getRight().isEmpty()){
-            System.out.println(t1.getRoot().toString());
+        if(t.getLeft().isEmpty() && t.getRight().isEmpty()){
+            System.out.println(t.getRoot().toString());
         }
-        showFrontier(t1.getRight());
-        showFrontier(t1.getLeft());
+        showFrontier(t.getRight());
+        showFrontier(t.getLeft());
     }
-
+    public void frontier(BinaryTree<T> t, ArrayList<T> frontierElements){
+        if(t.isEmpty()){
+            return;
+        }
+        if(t.getLeft().isEmpty() && t.getRight().isEmpty()){
+            frontierElements.add(t.getRoot());
+        }
+        frontier(t.getRight(),frontierElements);
+        frontier(t.getLeft(),frontierElements);
+    }
 }
 
