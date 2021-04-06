@@ -1,7 +1,6 @@
 package ArbolesBinarios;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class TreeApi <T extends Comparable> { //Metodos que vimos en clase
     //-----------------IMPLEMENTADOS EN CLASE----------------------------------------
@@ -26,7 +25,7 @@ public class TreeApi <T extends Comparable> { //Metodos que vimos en clase
         return 1 + completeNodes(a.getRight()) + completeNodes(a.getLeft());
     }
 
-    public void inorden(BinaryTree<T> a) { // recorre inorden e imprime los valores
+    public void inorden(BinaryTree<T> a) { //goes through the tree inorden and prints the values in the roots
         if (!a.isEmpty()) {
             inorden(a.getLeft());
             System.out.println(a.getRoot());
@@ -34,7 +33,7 @@ public class TreeApi <T extends Comparable> { //Metodos que vimos en clase
         }
     }
 
-    public void inorden(BinaryTree<T> a, ArrayList<T> ar) { //llena un arraylist con el recorrido inorden de un arbol
+    public void inorden(BinaryTree<T> a, ArrayList<T> ar) { //fills an arraylist with the inorden path
         if (!a.isEmpty()) {
             inorden(a.getLeft(), ar);
             ar.add(a.getRoot());
@@ -43,14 +42,14 @@ public class TreeApi <T extends Comparable> { //Metodos que vimos en clase
     }
 
     //-----------------GUIA-ARBOLES-BINARIOS------------------------------------------
-    public int weight(BinaryTree<T> a) { //IGUAL A SIZE
+    public int weight(BinaryTree<T> a) { //same as size
         if (a.isEmpty()) {
             return 1;
         }
         return 1 + size(a.getLeft()) + size(a.getRight());
     }
 
-    public int leaves(BinaryTree<T> a) {
+    public int leaves(BinaryTree<T> a) {//returns the ammount of leaves in the tree
         if (a.isEmpty()) {
             return 0;
         }
@@ -60,18 +59,18 @@ public class TreeApi <T extends Comparable> { //Metodos que vimos en clase
         return leaves(a.getLeft()) + leaves(a.getRight());
     }
 
-    public int ocurrencias(BinaryTree<T> a, T o) {
+    public int occurrences(BinaryTree<T> a, T o) {//returns the number of times a certain object o appears in a tree by comparing with .comparesTo()
         if (a.isEmpty()) {
             return 0;
         }
         if (a.getRoot().equals(o)) {
-            return 1 + ocurrencias(a.getLeft(), o) + ocurrencias(a.getRight(), o);
+            return 1 + occurrences(a.getLeft(), o) + occurrences(a.getRight(), o);
         } else {
-            return ocurrencias(a.getLeft(), o) + ocurrencias(a.getRight(), o);
+            return occurrences(a.getLeft(), o) + occurrences(a.getRight(), o);
         }
     }
 
-    public int elementsInLevel(BinaryTree<T> a, int level) {
+    public int elementsInLevel(BinaryTree<T> a, int level) {//returns the ammount of elements in a certain level
         if (a.isEmpty()) {
             return 0;
         }
@@ -85,7 +84,7 @@ public class TreeApi <T extends Comparable> { //Metodos que vimos en clase
         return heightAux(a) - 1;
     }
 
-    public int heightAux(BinaryTree<T> a) {
+    public int heightAux(BinaryTree<T> a) {//returns the longest path in the tree
         if (a.isEmpty()) {
             return 0;
         }
@@ -95,14 +94,14 @@ public class TreeApi <T extends Comparable> { //Metodos que vimos en clase
         return 1 + heightAux(a.getRight());
     }
 
-    public int sumElements(BinaryTree<Integer> a) {
+    public int sumElements(BinaryTree<Integer> a) {//The total sum of all the elements in a BinaryTree filled with Integers
         if (a.isEmpty()) {
             return 0;
         }
         return a.getRoot() + sumElements(a.getLeft()) + sumElements(a.getRight());
     }
 
-    public int sumElementsThreeMultiple(BinaryTree<Integer> a) {
+    public int sumElementsThreeMultiple(BinaryTree<Integer> a) {//the total sum of the multiples of three in a Binary Tree of Integers
         if (a.isEmpty()) {
             return 0;
         }
@@ -111,7 +110,7 @@ public class TreeApi <T extends Comparable> { //Metodos que vimos en clase
         }
         return sumElementsThreeMultiple(a.getLeft()) + sumElementsThreeMultiple(a.getRight());
     }
-    public boolean equals(BinaryTree<T> t1, BinaryTree<T> t2) {
+    public boolean equals(BinaryTree<T> t1, BinaryTree<T> t2) {//two trees are equal if they have the same elements organized in the same structure
         if ((t1.isEmpty() && !t2.isEmpty()) || (!t1.isEmpty() && t2.isEmpty())) {
             return false;
         }
@@ -124,7 +123,7 @@ public class TreeApi <T extends Comparable> { //Metodos que vimos en clase
         return false;
     }
 
-    public boolean isomorph(BinaryTree<T> t1, BinaryTree<T> t2) {
+    public boolean isomorph(BinaryTree<T> t1, BinaryTree<T> t2) {//two trees are isomorph if they have the same structure
         if ((t1.isEmpty() && !t2.isEmpty()) || (!t1.isEmpty() && t2.isEmpty())) {
             return false;
         }
@@ -134,10 +133,10 @@ public class TreeApi <T extends Comparable> { //Metodos que vimos en clase
         return isomorph(t1.getLeft(), t2.getLeft()) && isomorph(t1.getRight(), t2.getRight());
     }
 
-    public boolean areSimilar(BinaryTree<T> t1, BinaryTree<T> t2) {
+    public boolean areSimilar(BinaryTree<T> t1, BinaryTree<T> t2) {//two trees are similar if they have the same elements.
         return (size(t1) == size(t2)) && included(t1,t2);
     }
-    public boolean isComplete(BinaryTree<T> a) {
+    public boolean isComplete(BinaryTree<T> a) {//a tree is complete if all of their nodes are leaves or have two children. There isnt any node with only one child
         if (a.isEmpty()) {
             return false;
         }
@@ -150,46 +149,46 @@ public class TreeApi <T extends Comparable> { //Metodos que vimos en clase
         return isComplete(a.getLeft()) && isComplete(a.getRight());
     }
 
-    public boolean isFull(BinaryTree<T> t1){
+    public boolean isFull(BinaryTree<T> t1){//a tree is full if all of its leaves are in the same level
         if(Math.pow(2,height(t1)) == elementsInLevel(t1, height(t1))){
             return true;
         }
         return false;
     }
 
-    public boolean isEstable(BinaryTree<T> t1){
+    public boolean isStable(BinaryTree<T> t1){//a tree is stable if all of the children are less than their parents by using compareTo()
         if(t1.isEmpty() || size(t1) == 1){
             return true;
         }
-        return isEstableAux(t1);
+        return isStableAux(t1);
     }
 
-    private boolean isEstableAux(BinaryTree<T> t1){
+    private boolean isStableAux(BinaryTree<T> t1){
         if(t1.getRight().isEmpty() && t1.getLeft().isEmpty()){
             return true;
         }
         if(t1.getRight().isEmpty()){
-            return isEstableAux(t1.getLeft());
+            return isStableAux(t1.getLeft());
         }
         if(t1.getLeft().isEmpty()){
-            return isEstableAux(t1.getRight());
+            return isStableAux(t1.getRight());
         }
         if(t1.getRoot().compareTo(t1.getLeft().getRoot()) < 0 && t1.getRoot().compareTo(t1.getRight().getRoot()) < 0){
             return false;
         }
-        return isEstableAux(t1.getLeft()) && isEstableAux(t1.getRight());
+        return isStableAux(t1.getLeft()) && isStableAux(t1.getRight());
     }
 
-    public boolean included(BinaryTree<T> t1, BinaryTree<T> t2){ // verifica si t1 esta incluido en t2
+    public boolean included(BinaryTree<T> t1, BinaryTree<T> t2){ //verifies if t1 is included in t2. t1 is included if all of its elements appear only once in t2
         if(t1.isEmpty()){
             return true;
         }
-        if(ocurrencias(t2,t1.getRoot()) == 1){
+        if(occurrences(t2,t1.getRoot()) == 1){
             return included(t1.getLeft(), t2) && included(t1.getRight(), t2);
         }
         return false;
     }
-    public boolean occuresBinaryTree(BinaryTree<T> t1, BinaryTree<T> t2){
+    public boolean occursBinaryTree(BinaryTree<T> t1, BinaryTree<T> t2){//returns true if t2 is included in t1
         if(size(t2) > size(t1)){
             return false;
         }
@@ -198,17 +197,17 @@ public class TreeApi <T extends Comparable> { //Metodos que vimos en clase
                 return true;
             }
             if(t2.getLeft().isEmpty()){
-                return occuresBinaryTree(t1.getRight(), t2.getRight());
+                return occursBinaryTree(t1.getRight(), t2.getRight());
             }
             if(t2.getRight().isEmpty()){
-                return occuresBinaryTree(t1.getLeft(), t2.getLeft());
+                return occursBinaryTree(t1.getLeft(), t2.getLeft());
             }
-            return occuresBinaryTree(t1.getLeft(),t2.getLeft()) && occuresBinaryTree(t1.getRight(),t2.getRight());
+            return occursBinaryTree(t1.getLeft(),t2.getLeft()) && occursBinaryTree(t1.getRight(),t2.getRight());
         }
-        return occuresBinaryTree(t1.getLeft(), t2) || occuresBinaryTree(t1.getRight(), t2);
+        return occursBinaryTree(t1.getLeft(), t2) || occursBinaryTree(t1.getRight(), t2);
     }
 
-    public void showFrontier(BinaryTree<T> t1){
+    public void showFrontier(BinaryTree<T> t1){//prints all the elements stored in leaves
         if(t1.isEmpty()){
             return;
         }

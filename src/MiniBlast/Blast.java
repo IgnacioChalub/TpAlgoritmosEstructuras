@@ -13,7 +13,7 @@ public class Blast {
 
     public static double  blastComparisonPonderation(char[] referenceSequence, char[] querySequence) {
         int coincidences = 0; //Counts the elements that match
-        int changesRequired = 0; //Counts the ammounts of blocks of mismatches.
+        int changesRequired = 0; //Counts the ammount of blocks of mismatches.
         boolean lastElementWasEqual = true;
 
         //char[] qry = {'a', 'g', 'c','t','t','t'};

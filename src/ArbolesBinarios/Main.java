@@ -41,9 +41,9 @@ public class Main{
         api.inorden(t7);
 
         System.out.println("__________");
-        System.out.println(api.ocurrencias(t7, l5));
+        System.out.println(api.occurrences(t7, l5));
 
-        System.out.println(api.ocurrencias(t7, new Book(100, "zzz", 200)));
+        System.out.println(api.occurrences(t7, new Book(100, "zzz", 200)));
 
         ArrayList<Book> books = new ArrayList<Book>();
 
@@ -96,18 +96,18 @@ public class Main{
         System.out.println(api.isFull(t5));
 
         System.out.println("__________");
-        System.out.println(api.isEstable(t1));//true
-        System.out.println(api.isEstable(t3));//false
-        System.out.println(api.isEstable(t4));//
-        System.out.println(api.isEstable(t5));
+        System.out.println(api.isStable(t1));//true
+        System.out.println(api.isStable(t3));//false
+        System.out.println(api.isStable(t4));//
+        System.out.println(api.isStable(t5));
 
         System.out.println("__________");
-        System.out.println(api.occuresBinaryTree(t1, t2));//false
-        System.out.println(api.occuresBinaryTree(t3, t2));//false
-        System.out.println(api.occuresBinaryTree(t3,t1));//true
-        System.out.println(api.occuresBinaryTree(t7,t4));//true
-        System.out.println(api.occuresBinaryTree(t5,t6));//false
-        System.out.println(api.occuresBinaryTree(t4,t2));//true
+        System.out.println(api.occursBinaryTree(t1, t2));//false
+        System.out.println(api.occursBinaryTree(t3, t2));//false
+        System.out.println(api.occursBinaryTree(t3,t1));//true
+        System.out.println(api.occursBinaryTree(t7,t4));//true
+        System.out.println(api.occursBinaryTree(t5,t6));//false
+        System.out.println(api.occursBinaryTree(t4,t2));//true
 
         System.out.println("__________");
         api.showFrontier(t1);
