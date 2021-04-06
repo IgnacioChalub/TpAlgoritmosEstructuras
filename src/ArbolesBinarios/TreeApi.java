@@ -210,15 +210,13 @@ public class TreeApi <T extends Comparable> { //Metodos que vimos en clase
 
     public void showFrontier(BinaryTree<T> t1){//prints all the elements stored in leaves
         if(t1.isEmpty()){
-    public void showFrontier(BinaryTree<T> t){
-        if(t.isEmpty()){
             return;
         }
-        if(t.getLeft().isEmpty() && t.getRight().isEmpty()){
-            System.out.println(t.getRoot().toString());
+        if(t1.getLeft().isEmpty() && t1.getRight().isEmpty()){
+            System.out.println(t1.getRoot().toString());
         }
-        showFrontier(t.getRight());
-        showFrontier(t.getLeft());
+        showFrontier(t1.getRight());
+        showFrontier(t1.getLeft());
     }
     public void frontier(BinaryTree<T> t, ArrayList<T> frontierElements){
         if(t.isEmpty()){
