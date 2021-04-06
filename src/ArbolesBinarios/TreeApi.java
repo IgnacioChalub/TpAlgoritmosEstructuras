@@ -189,7 +189,7 @@ public class TreeApi <T extends Comparable> { //Metodos que vimos en clase
         }
         return false;
     }
-    public boolean occuresBinaryTree(BinaryTree<T> t1, BinaryTree<T> t2){
+    public boolean occursBinaryTree(BinaryTree<T> t1, BinaryTree<T> t2){
         if(size(t2) > size(t1)){
             return false;
         }
@@ -198,26 +198,35 @@ public class TreeApi <T extends Comparable> { //Metodos que vimos en clase
                 return true;
             }
             if(t2.getLeft().isEmpty()){
-                return occuresBinaryTree(t1.getRight(), t2.getRight());
+                return occursBinaryTree(t1.getRight(), t2.getRight());
             }
             if(t2.getRight().isEmpty()){
-                return occuresBinaryTree(t1.getLeft(), t2.getLeft());
+                return occursBinaryTree(t1.getLeft(), t2.getLeft());
             }
-            return occuresBinaryTree(t1.getLeft(),t2.getLeft()) && occuresBinaryTree(t1.getRight(),t2.getRight());
+            return occursBinaryTree(t1.getLeft(),t2.getLeft()) && occursBinaryTree(t1.getRight(),t2.getRight());
         }
-        return occuresBinaryTree(t1.getLeft(), t2) || occuresBinaryTree(t1.getRight(), t2);
+        return occursBinaryTree(t1.getLeft(), t2) || occursBinaryTree(t1.getRight(), t2);
     }
 
-    public void showFrontier(BinaryTree<T> t1){
-        if(t1.isEmpty()){
+    public void showFrontier(BinaryTree<T> t){
+        if(t.isEmpty()){
             return;
         }
-        if(t1.getLeft().isEmpty() && t1.getRight().isEmpty()){
-            System.out.println(t1.getRoot().toString());
+        if(t.getLeft().isEmpty() && t.getRight().isEmpty()){
+            System.out.println(t.getRoot().toString());
         }
-        showFrontier(t1.getRight());
-        showFrontier(t1.getLeft());
+        showFrontier(t.getRight());
+        showFrontier(t.getLeft());
     }
-
+    public void frontier(BinaryTree<T> t, ArrayList<T> frontierElements){
+        if(t.isEmpty()){
+            return;
+        }
+        if(t.getLeft().isEmpty() && t.getRight().isEmpty()){
+            frontierElements.add(t.getRoot());
+        }
+        frontier(t.getRight(),frontierElements);
+        frontier(t.getLeft(),frontierElements);
+    }
 }
 

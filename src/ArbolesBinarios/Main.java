@@ -102,12 +102,12 @@ public class Main{
         System.out.println(api.isEstable(t5));
 
         System.out.println("__________");
-        System.out.println(api.occuresBinaryTree(t1, t2));//false
-        System.out.println(api.occuresBinaryTree(t3, t2));//false
-        System.out.println(api.occuresBinaryTree(t3,t1));//true
-        System.out.println(api.occuresBinaryTree(t7,t4));//true
-        System.out.println(api.occuresBinaryTree(t5,t6));//false
-        System.out.println(api.occuresBinaryTree(t4,t2));//true
+        System.out.println(api.occursBinaryTree(t1, t2));//false
+        System.out.println(api.occursBinaryTree(t3, t2));//false
+        System.out.println(api.occursBinaryTree(t3,t1));//true
+        System.out.println(api.occursBinaryTree(t7,t4));//true
+        System.out.println(api.occursBinaryTree(t5,t6));//false
+        System.out.println(api.occursBinaryTree(t4,t2));//true
 
         System.out.println("__________");
         api.showFrontier(t1);
@@ -124,6 +124,10 @@ public class Main{
         System.out.println("__________");
         api.showFrontier(t7);
 
-
+        ArrayList<Book> bookArrayList = new ArrayList<>();
+        api.frontier(t7,bookArrayList);
+        for (int i = 0; i < bookArrayList.size(); i++) {
+            System.out.println(bookArrayList.get(i).getTitle());
+        }
     }
 }
