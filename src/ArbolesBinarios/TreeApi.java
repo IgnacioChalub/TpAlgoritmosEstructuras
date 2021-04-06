@@ -137,17 +137,6 @@ public class TreeApi <T extends Comparable> { //Metodos que vimos en clase
     public boolean areSimilar(BinaryTree<T> t1, BinaryTree<T> t2) {
         return (size(t1) == size(t2)) && included(t1,t2);
     }
-
-    private int areSimilar(List t1Elements, BinaryTree<T> t2) {
-       if(t2.isEmpty()){
-           return 0;
-       }
-       if(t1Elements.contains(t2.getRoot())){
-           return 1 + areSimilar(t1Elements,t2.getLeft()) + areSimilar(t1Elements, t2.getRight());
-       }
-       return 0;
-    }
-
     public boolean isComplete(BinaryTree<T> a) {
         if (a.isEmpty()) {
             return false;
@@ -190,7 +179,8 @@ public class TreeApi <T extends Comparable> { //Metodos que vimos en clase
         }
         return isEstableAux(t1.getLeft()) && isEstableAux(t1.getRight());
     }
-    public boolean included(BinaryTree<T> t1, BinaryTree<T> t2){ // verifica si t2 esta incluido en t2
+
+    public boolean included(BinaryTree<T> t1, BinaryTree<T> t2){ // verifica si t1 esta incluido en t2
         if(t1.isEmpty()){
             return true;
         }
@@ -199,7 +189,6 @@ public class TreeApi <T extends Comparable> { //Metodos que vimos en clase
         }
         return false;
     }
-
     public boolean occuresBinaryTree(BinaryTree<T> t1, BinaryTree<T> t2){
         if(size(t2) > size(t1)){
             return false;
@@ -229,11 +218,6 @@ public class TreeApi <T extends Comparable> { //Metodos que vimos en clase
         showFrontier(t1.getRight());
         showFrontier(t1.getLeft());
     }
-
-    public ArrayList frontier(BinaryTree<T> t1, Object elem){
-        return null;
-    }
-
 
 }
 
