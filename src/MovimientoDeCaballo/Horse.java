@@ -27,4 +27,7 @@ public class Horse {
     public void move(Position newPosition){
         position = newPosition;
     }
+    public Position getPosition() {
+        return position;
+    }
 }
