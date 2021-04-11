@@ -8,10 +8,10 @@ public class Position {
         this.row = row;
         this.column = column;
     }
-    public boolean isValid(){
+    public boolean isValid(){ //Checks row and column are inside the board
         return (row >= 1 && row <= 8) && (column >= 1 && column <= 8);
     }
-    public String toString(){
+    public String toString(){ //Translate the column and row from two numbers to letter and number form.
         String position = "";
         switch (column){
             case 1:

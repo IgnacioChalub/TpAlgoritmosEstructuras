@@ -14,27 +14,27 @@ public class Game {
         this.horse = horse;
         activeStackIndex = -1;
     }
-    public void fillNextStack(){
+    public void fillNextStack(){ //Fills the next stack with the possible moves from the actual horse position. Then moves the horse to the top position in the new stack.
         if(activeStackIndex < jumps-1 && horse.getPosition() != null) {
             activeStackIndex++;
             movesRegisters[activeStackIndex] = horse.getPossibleMoves();
             horse.move(movesRegisters[activeStackIndex].peek());
         }
     }
-    public void showPossiblePaths() throws IsEmptyException {
+    public void showPossiblePaths() throws IsEmptyException { //Prints all paths when the n stacks are filled (are jumps are done)
         if (allStacksEmpty() || activeStackIndex == -1){ //Cut condition: if the first stack is empty it means that it showed all the possible paths so it returns.
             return;
         }
-        int lastStackSize = movesRegisters[jumps-1].size(); //Stores the number of position in the last jump stack
+        int lastStackSize = movesRegisters[jumps-1].size(); //Stores the number of positions in the last stack.
         String previousPositionsInPath = "";
-        for (int i = 0; i < movesRegisters.length-1; i++) { //Stores the first part of the path (without the last jump)
+        for (int i = 0; i < movesRegisters.length-1; i++) { //Stores the first part of the path (without the last jump positions)
             previousPositionsInPath += movesRegisters[i].peek().toString() + " - ";
         }
-        for (int i = 0; i < lastStackSize; i++) { //Prints the paths changing the last jump position. After it is printed, that last position is popped from the stack.
+        for (int i = 0; i < lastStackSize; i++) { //Prints the combination of the path with all the possible last jumps. After it is printed, that last position is popped from the stack.
             System.out.println(previousPositionsInPath + movesRegisters[jumps-1].peek().toString());
             movesRegisters[jumps-1].pop();
         }
-        goBack(); // Calls Go back to delete the positions that have no more possible paths to be shown.
+        goBack(); // Calls Go back to remove the combinations that have already been printed and stand in another position.
 
         horse.move(movesRegisters[activeStackIndex].peek()); //Moves the horse to the next position to refill the stacks.
 
@@ -43,14 +43,14 @@ public class Game {
         }
         showPossiblePaths(); //Calls itself to continue showing the possible paths.
     }
-    private void goBack() throws IsEmptyException {
-        if(movesRegisters[activeStackIndex].isEmpty() && activeStackIndex > 0){
+    private void goBack() throws IsEmptyException { //Method that does part of the backtracking.
+        if(movesRegisters[activeStackIndex].isEmpty() && activeStackIndex > 0){ //If the stack is empty and it is not the first one in the array it goes to the previous one and pops the element in the top.
             activeStackIndex--;
             movesRegisters[activeStackIndex].pop();
-            goBack();
+            goBack(); //Then it calls itself to check if this stack is empty.
         }
     }
-    public void showStackContents() throws IsEmptyException {
+    public void showStackContents() throws IsEmptyException { //Prints the positions stored in each stack (before completing the n jumps)
         if(activeStackIndex == -1){
             System.out.println("Stacks are empty.");
         }
@@ -64,7 +64,7 @@ public class Game {
     private boolean allStacksEmpty() {
         return movesRegisters[0].isEmpty();
     }
-    private void printStackElements(StackDynamic<Position> s) throws IsEmptyException {
+    private void printStackElements(StackDynamic<Position> s) throws IsEmptyException { // Prints the positions in a stack popping and then re-stacking each one.
         if(s.isEmpty()){
             return;
         }
