@@ -9,8 +9,8 @@ public class Horse {
     public StackDynamic<Position> getPossibleMoves(){
         Position[] newPositions = new Position[8];
         StackDynamic<Position> possibleMoves = new StackDynamic<Position>();
-        newPositions[0] = new Position(position.getRow() +1, position.getColumn() +2);
-        newPositions[1] = new Position(position.getRow() +1, position.getColumn() -2);
+        newPositions[0] = new Position(position.getRow() +1, position.getColumn() -2);
+        newPositions[1] = new Position(position.getRow() +1, position.getColumn() +2);
         newPositions[2] = new Position(position.getRow() +2, position.getColumn() +1);
         newPositions[3] = new Position(position.getRow() +2, position.getColumn() -1);
         newPositions[4] = new Position(position.getRow() -1, position.getColumn() +2);

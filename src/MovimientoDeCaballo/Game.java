@@ -43,8 +43,8 @@ public class Game {
         }
         showPossiblePaths(); //Calls itself to continue showing the possible paths.
     }
-    public void goBack() throws IsEmptyException {
-        if(movesRegisters[activeStackIndex].isEmpty()){
+    private void goBack() throws IsEmptyException {
+        if(movesRegisters[activeStackIndex].isEmpty() && activeStackIndex > 0){
             activeStackIndex--;
             movesRegisters[activeStackIndex].pop();
             goBack();
@@ -61,10 +61,10 @@ public class Game {
             }
         }
     }
-    public boolean allStacksEmpty() {
+    private boolean allStacksEmpty() {
         return movesRegisters[0].isEmpty();
     }
-    public void printStackElements(StackDynamic<Position> s) throws IsEmptyException {
+    private void printStackElements(StackDynamic<Position> s) throws IsEmptyException {
         if(s.isEmpty()){
             return;
         }
