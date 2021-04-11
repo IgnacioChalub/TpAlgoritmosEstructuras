@@ -7,13 +7,17 @@ import java.util.Stack;
 public class Menu {
     public static void main(String[] args) {
         int initialColumn;
+        int initialRow;
         do{
             String initialColumnStr = Scanner.getString("column: ");
             initialColumnStr = initialColumnStr.toUpperCase();
             initialColumn = columnToInt(initialColumnStr);
         }
         while (initialColumn>8 || initialColumn<1);
-        int initialRow = Scanner.getInt("row: ");
+        do{
+            initialRow = Scanner.getInt("row: ");
+        }
+        while (initialRow>8 || initialRow<1);
         int jumps = Scanner.getInt("jumps: ");
         int jumpsDone = 0;
         Game game = new Game(jumps, new Horse(new Position(initialRow,initialColumn)));
