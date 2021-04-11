@@ -6,9 +6,13 @@ import java.util.Stack;
 
 public class Menu {
     public static void main(String[] args) {
-        String initialColumnStr = Scanner.getString("column: ");
-        initialColumnStr.toUpperCase();
-        int initialColumn = columnToInt(initialColumnStr);
+        int initialColumn;
+        do{
+            String initialColumnStr = Scanner.getString("column: ");
+            initialColumnStr = initialColumnStr.toUpperCase();
+            initialColumn = columnToInt(initialColumnStr);
+        }
+        while (initialColumn>8 || initialColumn<1);
         int initialRow = Scanner.getInt("row: ");
         int jumps = Scanner.getInt("jumps: ");
         int jumpsDone = 0;
@@ -25,6 +29,7 @@ public class Menu {
                     if(jumps == jumpsDone){
                         try {
                             game.showPossiblePaths();
+                            System.exit(0);
                         } catch (IsEmptyException e) {
                             System.out.println(e.getMessage());
                         }

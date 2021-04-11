@@ -15,7 +15,7 @@ public class Game {
         activeStackIndex = -1;
     }
     public void fillNextStack(){
-        if(activeStackIndex < jumps-1) {
+        if(activeStackIndex < jumps-1 && horse.getPosition() != null) {
             activeStackIndex++;
             movesRegisters[activeStackIndex] = horse.getPossibleMoves();
             horse.move(movesRegisters[activeStackIndex].peek());
