@@ -228,5 +228,20 @@ public class TreeApi <T extends Comparable> { //Metodos que vimos en clase
         frontier(t.getRight(),frontierElements);
         frontier(t.getLeft(),frontierElements);
     }
+    public void byLevel(BinaryTree<T> t) throws IsEmptyException {
+        BinaryTree<T> a = new BinaryTree<>();
+        QueueDynamic<BinaryTree<T>> q = new QueueDynamic<>();
+        q.enqueue(t);
+        while(!q.isEmpty()){
+            a = q.dequeue();
+            System.out.println(a.getRoot());
+            if(!a.getLeft().isEmpty()){
+                q.enqueue(a.getLeft());
+            }
+            if(!a.getRight().isEmpty()){
+                q.enqueue(a.getRight());
+            }
+        }
+    }
 }
 
