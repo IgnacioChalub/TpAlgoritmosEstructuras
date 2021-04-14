@@ -50,7 +50,12 @@ public class Main{
 
         System.out.println("__________");
 
-        api.byLevel(t7);
+        try{
+            api.byLevel(t7);
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+
 
         System.out.println("__________");
         System.out.println(api.occurrences(t7, l5));
