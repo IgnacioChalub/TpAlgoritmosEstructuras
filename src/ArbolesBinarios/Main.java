@@ -146,5 +146,10 @@ public class Main{
         for (int i = 0; i < bookArrayList.size(); i++) {
             System.out.println(bookArrayList.get(i).getTitle());
         }
+        try {
+            api.byLevel(t7);
+        }catch (IsEmptyException e){
+            System.out.println(e.getMessage());
+        }
     }
 }

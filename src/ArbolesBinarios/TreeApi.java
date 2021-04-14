@@ -3,8 +3,7 @@ package ArbolesBinarios;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TreeApi <T extends Comparable> { //Metodos que vimos en clase
-    //-----------------IMPLEMENTADOS EN CLASE----------------------------------------
+public class TreeApi <T extends Comparable> {
 
     public int size(BinaryTree<T> a) {
         if (a.isEmpty()) {
@@ -89,8 +88,6 @@ public class TreeApi <T extends Comparable> { //Metodos que vimos en clase
             preorden(bt.getRight());
         }
     }
-
-    //-----------------GUIA-ARBOLES-BINARIOS------------------------------------------
     public int weight(BinaryTree<T> a) { //same as size
         if (a.isEmpty()) {
             return 1;
