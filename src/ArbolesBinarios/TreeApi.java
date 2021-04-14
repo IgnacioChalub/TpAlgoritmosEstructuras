@@ -42,6 +42,54 @@ public class TreeApi <T extends Comparable> { //Metodos que vimos en clase
         }
     }
 
+    public void byLevel(BinaryTree<T> t) throws IsEmptyException {
+        BinaryTree<T> a = new BinaryTree<>();
+        QueueDynamic<BinaryTree<T>> q = new QueueDynamic<>();
+        q.enqueue(t);
+        while(!q.isEmpty()){
+            a = q.dequeue();
+            System.out.println(a.getRoot());
+            if(!a.getLeft().isEmpty()){
+                q.enqueue(a.getLeft());
+            }
+            if(!a.getRight().isEmpty()){
+                q.enqueue(a.getRight());
+            }
+        }
+    }
+
+    public void postorden(BinaryTree<T> bt){
+        if(!bt.isEmpty()){
+            postorden(bt.getLeft());
+            postorden(bt.getRight());
+            System.out.println(bt.getRoot());
+        }
+    }
+
+    public void postorden(BinaryTree<T> bt, ArrayList<T> ar){
+        if(!bt.isEmpty()){
+            postorden(bt.getLeft());
+            postorden(bt.getRight());
+            ar.add(bt.getRoot());
+        }
+    }
+
+    public void preorden(BinaryTree<T> bt){
+        if(!bt.isEmpty()){
+            System.out.println(bt.getRoot());
+            preorden(bt.getLeft());
+            preorden(bt.getRight());
+        }
+    }
+
+    public void preorden(BinaryTree<T> bt, ArrayList<T> ar){
+        if(!bt.isEmpty()){
+            ar.add(bt.getRoot());
+            preorden(bt.getLeft());
+            preorden(bt.getRight());
+        }
+    }
+
     //-----------------GUIA-ARBOLES-BINARIOS------------------------------------------
     public int weight(BinaryTree<T> a) { //same as size
         if (a.isEmpty()) {
@@ -228,20 +276,6 @@ public class TreeApi <T extends Comparable> { //Metodos que vimos en clase
         frontier(t.getRight(),frontierElements);
         frontier(t.getLeft(),frontierElements);
     }
-    public void byLevel(BinaryTree<T> t) throws IsEmptyException {
-        BinaryTree<T> a = new BinaryTree<>();
-        QueueDynamic<BinaryTree<T>> q = new QueueDynamic<>();
-        q.enqueue(t);
-        while(!q.isEmpty()){
-            a = q.dequeue();
-            System.out.println(a.getRoot());
-            if(!a.getLeft().isEmpty()){
-                q.enqueue(a.getLeft());
-            }
-            if(!a.getRight().isEmpty()){
-                q.enqueue(a.getRight());
-            }
-        }
-    }
+
 }
 

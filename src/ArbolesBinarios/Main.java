@@ -3,7 +3,7 @@ package ArbolesBinarios;
 import java.util.ArrayList;
 
 public class Main{
-    public static void main(String[] args) { //Ejemplo del arbol binario con el objeto book
+    public static void main(String[] args) throws IsEmptyException { //Ejemplo del arbol binario con el objeto book
         Book l1 = new Book(12, "Hamlet", 230);
         Book l2 = new Book(25, "Muerte en las nubes", 321);
         Book l3 = new Book(22, "El precio de la intriga", 530);
@@ -39,6 +39,18 @@ public class Main{
         System.out.println("__________");
 
         api.inorden(t7);
+
+        System.out.println("__________");
+
+        api.postorden(t7);
+
+        System.out.println("__________");
+
+        api.preorden(t7);
+
+        System.out.println("__________");
+
+        api.byLevel(t7);
 
         System.out.println("__________");
         System.out.println(api.occurrences(t7, l5));
