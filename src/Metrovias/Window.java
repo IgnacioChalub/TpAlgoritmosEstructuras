@@ -13,5 +13,4 @@ public class Window {
         this.line = new QueueDynamic<>();
         this.tickets = new StackDynamic<>();
     }
-
 }

@@ -11,7 +11,6 @@ public class TreeApi <T extends Comparable> {
         }
         return 1 + size(a.getLeft()) + size(a.getRight());
     }
-
     public int completeNodes(BinaryTree<T> a) {
         if (a.isEmpty()) {
             return 0;
@@ -40,7 +39,6 @@ public class TreeApi <T extends Comparable> {
             inorden(a.getRight(), ar);
         }
     }
-
     public void byLevel(BinaryTree<T> t) throws IsEmptyException {
         BinaryTree<T> a = new BinaryTree<>();
         QueueDynamic<BinaryTree<T>> q = new QueueDynamic<>();
@@ -48,6 +46,21 @@ public class TreeApi <T extends Comparable> {
         while(!q.isEmpty()){
             a = q.dequeue();
             System.out.println(a.getRoot());
+            if(!a.getLeft().isEmpty()){
+                q.enqueue(a.getLeft());
+            }
+            if(!a.getRight().isEmpty()){
+                q.enqueue(a.getRight());
+            }
+        }
+    }
+    public void byLevel(BinaryTree<T> t, ArrayList<T> ar) throws IsEmptyException {
+        BinaryTree<T> a = new BinaryTree<>();
+        QueueDynamic<BinaryTree<T>> q = new QueueDynamic<>();
+        q.enqueue(t);
+        while(!q.isEmpty()){
+            a = q.dequeue();
+            ar.add(a.getRoot());
             if(!a.getLeft().isEmpty()){
                 q.enqueue(a.getLeft());
             }
@@ -67,8 +80,8 @@ public class TreeApi <T extends Comparable> {
 
     public void postorden(BinaryTree<T> bt, ArrayList<T> ar){
         if(!bt.isEmpty()){
-            postorden(bt.getLeft());
-            postorden(bt.getRight());
+            postorden(bt.getLeft(),ar);
+            postorden(bt.getRight(),ar);
             ar.add(bt.getRoot());
         }
     }
@@ -84,10 +97,11 @@ public class TreeApi <T extends Comparable> {
     public void preorden(BinaryTree<T> bt, ArrayList<T> ar){
         if(!bt.isEmpty()){
             ar.add(bt.getRoot());
-            preorden(bt.getLeft());
-            preorden(bt.getRight());
+            preorden(bt.getLeft(),ar);
+            preorden(bt.getRight(),ar);
         }
     }
+
     public int weight(BinaryTree<T> a) { //same as size
         if (a.isEmpty()) {
             return 1;
@@ -130,7 +144,7 @@ public class TreeApi <T extends Comparable> {
         return heightAux(a) - 1;
     }
 
-    public int heightAux(BinaryTree<T> a) {//returns the longest path in the tree
+    private int heightAux(BinaryTree<T> a) {//returns the longest path in the tree
         if (a.isEmpty()) {
             return 0;
         }
@@ -196,8 +210,8 @@ public class TreeApi <T extends Comparable> {
     }
 
     public boolean isFull(BinaryTree<T> t1){//a tree is full if all of its leaves are in the same level
-        if(Math.pow(2,height(t1)) == elementsInLevel(t1, height(t1))){
-            return true;
+        if(Math.pow(2,height(t1)) == elementsInLevel(t1, height(t1))){ //square of n (height) must be equal to elements in last level. Checks if the tree's last level is full.
+            return true;                                               //With this condition we check if leaves are all in the same level.
         }
         return false;
     }
@@ -219,7 +233,7 @@ public class TreeApi <T extends Comparable> {
         if(t1.getLeft().isEmpty()){
             return isStableAux(t1.getRight());
         }
-        if(t1.getRoot().compareTo(t1.getLeft().getRoot()) < 0 && t1.getRoot().compareTo(t1.getRight().getRoot()) < 0){
+        if(t1.getRoot().compareTo(t1.getLeft().getRoot()) < 0 || t1.getRoot().compareTo(t1.getRight().getRoot()) < 0){
             return false;
         }
         return isStableAux(t1.getLeft()) && isStableAux(t1.getRight());
