@@ -1,6 +1,5 @@
 package ArbolesBinarios;
 
-//Matias Coulougian 18/03/2021
 public class Node<T> {
      T value;
      Node<T> next;

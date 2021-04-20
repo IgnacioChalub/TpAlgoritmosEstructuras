@@ -1,5 +1,8 @@
-package ArbolesBinarios;
+package ArbolesBinarios.Testing;
 
+import ArbolesBinarios.BinaryTree;
+import ArbolesBinarios.IsEmptyException;
+import ArbolesBinarios.TreeApi;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -8,7 +11,7 @@ import static org.junit.Assert.*;
 
 public class TreeApiTest {
     TreeApi<Integer> api = new TreeApi<>();
-    BinaryTree<Integer> tree= new BinaryTree<>(3,new BinaryTree<Integer>(5,new BinaryTree<Integer>(6,new BinaryTree<>(),new BinaryTree<Integer>(9)),new BinaryTree<>()),new BinaryTree<Integer>(2,new BinaryTree<Integer>(1,new BinaryTree<>(),new BinaryTree<Integer>(6)),new BinaryTree<>(4)));
+    BinaryTree<Integer> tree= new BinaryTree<>(3,new BinaryTree<Integer>(5,new BinaryTree<Integer>(6,new BinaryTree<>(),new BinaryTree<Integer>(9)),new BinaryTree<>()),new BinaryTree<Integer>(2,new BinaryTree<Integer>(1,new BinaryTree<>(),new BinaryTree<Integer>(7)),new BinaryTree<>(4)));
 
     @Test
     public void size(){
@@ -27,7 +30,7 @@ public class TreeApiTest {
         inordenCompare.add(5);
         inordenCompare.add(3);
         inordenCompare.add(1);
-        inordenCompare.add(6);
+        inordenCompare.add(7);
         inordenCompare.add(2);
         inordenCompare.add(4);
         api.inorden(tree,inordenArray);
@@ -44,7 +47,7 @@ public class TreeApiTest {
         byLevelCompare.add(1);
         byLevelCompare.add(4);
         byLevelCompare.add(9);
-        byLevelCompare.add(6);
+        byLevelCompare.add(7);
         api.byLevel(tree,byLevelArray);
         assertEquals(byLevelCompare,byLevelArray);
     }
@@ -56,7 +59,7 @@ public class TreeApiTest {
         postordenCompare.add(9);
         postordenCompare.add(6);
         postordenCompare.add(5);
-        postordenCompare.add(6);
+        postordenCompare.add(7);
         postordenCompare.add(1);
         postordenCompare.add(4);
         postordenCompare.add(2);
@@ -74,7 +77,7 @@ public class TreeApiTest {
         preordenCompare.add(9);
         preordenCompare.add(2);
         preordenCompare.add(1);
-        preordenCompare.add(6);
+        preordenCompare.add(7);
         preordenCompare.add(4);
         api.preorden(tree,preordenArray);
         assertEquals(preordenCompare,preordenArray);
@@ -85,8 +88,10 @@ public class TreeApiTest {
     }
     @Test
     public void ocurrences(){
+        BinaryTree<Integer> t = new BinaryTree<>(3,new BinaryTree<>(3,new BinaryTree<>(3),new BinaryTree<>(2)),new BinaryTree<>(3));
         assertEquals(1,api.occurrences(tree,1));
-        assertEquals(2,api.occurrences(tree,6));
+        assertEquals(1,api.occurrences(tree,6));
+        assertEquals(4,api.occurrences(t,3));
         assertEquals(0,api.occurrences(tree,99));
     }
     @Test
@@ -102,11 +107,11 @@ public class TreeApiTest {
     }
     @Test
     public void sumElements(){
-        assertEquals(36,api.sumElements(tree));
+        assertEquals(37,api.sumElements(tree));
     }
     @Test
     public void sumElementsThreeMultiple(){
-        assertEquals(24,api.sumElementsThreeMultiple(tree));
+        assertEquals(18,api.sumElementsThreeMultiple(tree));
     }
     @Test
     public void equals(){
@@ -165,17 +170,17 @@ public class TreeApiTest {
     public void occursBinaryTree(){
         BinaryTree<Integer> tree1 = new BinaryTree<>(10,tree,new BinaryTree<>(2));
         BinaryTree<Integer> tree2 = new BinaryTree<>(11, new BinaryTree<>(2), new BinaryTree<>(5,new BinaryTree<Integer>(3,new BinaryTree<Integer>(6,new BinaryTree<>(),new BinaryTree<Integer>(9)),new BinaryTree<>()),new BinaryTree<Integer>(1,new BinaryTree<Integer>(2,new BinaryTree<>(12),new BinaryTree<Integer>(6)),new BinaryTree<>(4))));
-        BinaryTree<Integer> tree3 = new BinaryTree<>(3,new BinaryTree<Integer>(21,new BinaryTree<Integer>(6,new BinaryTree<>(),new BinaryTree<Integer>(9)),new BinaryTree<>()),new BinaryTree<Integer>(2,new BinaryTree<Integer>(1,new BinaryTree<>(),new BinaryTree<Integer>(6)),tree));
-        assertTrue(api.occursBinaryTree(tree1,tree));
-        assertFalse(api.occursBinaryTree(tree2, tree ));
-        assertTrue(api.occursBinaryTree(tree3, tree));
+        BinaryTree<Integer> tree3 = new BinaryTree<>(1,new BinaryTree<Integer>(21,new BinaryTree<Integer>(6,new BinaryTree<>(),new BinaryTree<Integer>(9)),new BinaryTree<>()),new BinaryTree<Integer>(2,new BinaryTree<Integer>(1,new BinaryTree<>(),new BinaryTree<Integer>(6)),tree));
+        assertTrue(api.occursBinaryTree(tree,tree1));
+        assertFalse(api.occursBinaryTree(tree, tree2 ));
+        assertTrue(api.occursBinaryTree(tree, tree3));
     }
     @Test
     public void frontier(){
         ArrayList<Integer> frontierArray = new ArrayList<>();
         ArrayList<Integer> frontierCompare = new ArrayList<>();
         frontierCompare.add(4);
-        frontierCompare.add(6);
+        frontierCompare.add(7);
         frontierCompare.add(9);
         api.frontier(tree,frontierArray);
         assertEquals(frontierCompare,frontierArray);

@@ -248,23 +248,14 @@ public class TreeApi <T extends Comparable> {
         }
         return false;
     }
-    public boolean occursBinaryTree(BinaryTree<T> t1, BinaryTree<T> t2){//returns true if t2 is included in t1
-        if(size(t2) > size(t1)){
+    public boolean occursBinaryTree(BinaryTree<T> t1, BinaryTree<T> t2){//returns true if t1 is included in t2
+        if (t1.isEmpty())
+            return true;
+        if (t2.isEmpty())
             return false;
-        }
-        if(t1.getRoot().equals(t2.getRoot())){
-            if(t2.getRight().isEmpty() && t2.getLeft().isEmpty()){
-                return true;
-            }
-            if(t2.getLeft().isEmpty()){
-                return occursBinaryTree(t1.getRight(), t2.getRight());
-            }
-            if(t2.getRight().isEmpty()){
-                return occursBinaryTree(t1.getLeft(), t2.getLeft());
-            }
-            return occursBinaryTree(t1.getLeft(),t2.getLeft()) && occursBinaryTree(t1.getRight(),t2.getRight());
-        }
-        return occursBinaryTree(t1.getLeft(), t2) || occursBinaryTree(t1.getRight(), t2);
+        if (t1.getRoot().equals(t2.getRoot()))
+            return (occursBinaryTree(t1.getLeft(), t2.getLeft()) && occursBinaryTree(t1.getRight(), t2.getRight()));
+        return occursBinaryTree(t1, t2.getLeft()) || occursBinaryTree(t1, t2.getRight());
     }
 
     public void showFrontier(BinaryTree<T> t1){//prints all the elements stored in leaves

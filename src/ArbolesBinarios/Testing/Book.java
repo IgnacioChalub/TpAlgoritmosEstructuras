@@ -1,4 +1,4 @@
-package ArbolesBinarios;
+package ArbolesBinarios.Testing;
 
 public class Book implements Comparable {
     private int code;

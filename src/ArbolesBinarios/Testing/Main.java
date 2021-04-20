@@ -1,4 +1,8 @@
-package ArbolesBinarios;
+package ArbolesBinarios.Testing;
+
+import ArbolesBinarios.BinaryTree;
+import ArbolesBinarios.IsEmptyException;
+import ArbolesBinarios.TreeApi;
 
 import java.util.ArrayList;
 
@@ -14,7 +18,7 @@ public class Main{
 
         TreeApi<Book> api = new TreeApi<Book>();
 
-        BinaryTree <Book> t1 = new BinaryTree<Book>(l7);
+        BinaryTree<Book> t1 = new BinaryTree<Book>(l7);
 
         BinaryTree <Book> t2 = new BinaryTree<Book>(l5);
 
