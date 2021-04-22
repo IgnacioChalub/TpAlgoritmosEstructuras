@@ -1,8 +1,7 @@
 package Metrovias;
 
+import Metrovias.StackAndQueue.StackDynamic;
 import Metrovias.StackAndQueue.IsEmptyException;
-
-import java.util.Random;
 
 public class Simulation {
     Metrovia metrovia;
@@ -18,16 +17,44 @@ public class Simulation {
         time += 30;
         Passenger[] newPassengers = {new Passenger(time),new Passenger(time),new Passenger(time),new Passenger(time),new Passenger(time)};
         assignPassengers(newPassengers);
-        try {
-            passengersAttention();
-        }catch (IsEmptyException exception){
-            System.out.println(exception.getMessage());
-        }
+        passengersUnqueue();
+
     }
     public void endSimulation(){
         //Imprime monto total y el tiempo medio de espera de cada ventanilla.
+        Double[] averageTimeByWindow = metrovia.getWindowsAvgTime();
+        System.out.println("Average wait time for each window (in seconds): ");
+        for (int i = 0; i < metrovia.getWindowsNumber(); i++) {
+            System.out.println("Window " + (i+1) + ": " + averageTimeByWindow[i]);
+        }
+
+        Double[] collectedByWindow = metrovia.getCollectedAmmount();
+        System.out.println("Money collected by each window: ");
+        for (int i = 0; i < metrovia.getWindowsNumber(); i++) {
+            System.out.println("Window " + (i+1) + ": " + collectedByWindow[i]);
+        }
+
+
         //Muestra la pila de tickets de metrovia con mostrarPila()
+        try {
+            showStack(metrovia.getTickets());
+        } catch (IsEmptyException e) {
+            System.out.println(e.getMessage());
+        }
     }
+
+    private void showStack(StackDynamic<Ticket> s) throws IsEmptyException {
+         // Prints the positions in a stack popping and then re-stacking each one.
+        if(s.isEmpty()){
+            return;
+        }
+        Ticket ticket = s.peek();
+        s.pop();
+        showStack(s);
+        System.out.println(ticket.toString());
+        s.stack(ticket);
+    }
+
     public void assignPassengers(Passenger[] newPassengers){
         int amountOfWindows = metrovia.getWindowsNumber();
         for (int i = 0; i < 5; i++) {
@@ -35,7 +62,7 @@ public class Simulation {
             metrovia.assignPassengerToWindow(newPassengers[i], windowNumber);
         }
     }
-    public void passengersAttention() throws IsEmptyException {
+    public void passengersUnqueue() {
         for (int i = 0; i < metrovia.getWindowsNumber(); i++) {
             if(generateNumber() < atentionProbability){
                 metrovia.attendPassengers(time,i);
@@ -43,6 +70,6 @@ public class Simulation {
         }
     }
     public double generateNumber(){
-        return Math.random() * 1;
+        return Math.random() * 100;
     }
 }
