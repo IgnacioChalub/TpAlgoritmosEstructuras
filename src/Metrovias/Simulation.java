@@ -18,8 +18,8 @@ public class Simulation {
         Passenger[] newPassengers = {new Passenger(time),new Passenger(time),new Passenger(time),new Passenger(time),new Passenger(time)};
         assignPassengers(newPassengers);
         passengersUnqueue();
-
     }
+
     public void endSimulation(){
         //Imprime monto total y el tiempo medio de espera de cada ventanilla.
         Double[] averageTimeByWindow = metrovia.getWindowsAvgTime();
