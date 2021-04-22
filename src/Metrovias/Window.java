@@ -46,6 +46,9 @@ public class Window {
     }
 
     public Double getAverageTime() {
+        if(tickets.size() == 0){
+            return 0.0;
+        }
         int totalTime = 0;
         int ticketAmmount = tickets.size();
         while (!tickets.isEmpty()){

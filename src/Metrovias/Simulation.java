@@ -31,7 +31,7 @@ public class Simulation {
         Double[] collectedByWindow = metrovia.getCollectedAmmount();
         System.out.println("Money collected by each window: ");
         for (int i = 0; i < metrovia.getWindowsNumber(); i++) {
-            System.out.println("Window " + (i+1) + ": " + collectedByWindow[i]);
+            System.out.println("Window " + (i+1) + ": " + collectedByWindow[i] );
         }
 
 
