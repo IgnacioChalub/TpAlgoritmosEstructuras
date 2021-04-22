@@ -4,6 +4,7 @@ public class Ticket {
     private Integer ticketNumber;
     private Integer attentionTime;
 
+
     public Ticket(Integer ticketNumber, Integer attentionTime) {
         this.ticketNumber = ticketNumber;
         this.attentionTime = attentionTime;

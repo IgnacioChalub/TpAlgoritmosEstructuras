@@ -7,15 +7,20 @@ public class Simulation {
     Metrovia metrovia;
     Double atentionProbability;
     Integer time;
+    int passengersIn30seconds;
 
-    public Simulation(Metrovia metrovia, Double atentionProbability) {
+    public Simulation(Metrovia metrovia, Double atentionProbability, int passengersIn30seconds) {
         this.metrovia = metrovia;
         this.atentionProbability = atentionProbability;
         time = 0;
+        this.passengersIn30seconds = passengersIn30seconds;
     }
     public void run30seconds(){
         time += 30;
-        Passenger[] newPassengers = {new Passenger(time),new Passenger(time),new Passenger(time),new Passenger(time),new Passenger(time)};
+        Passenger[] newPassengers = new Passenger[passengersIn30seconds];
+        for (int i = 0; i < passengersIn30seconds; i++) {
+            newPassengers[i] = new Passenger(time);
+        }
         assignPassengers(newPassengers);
         passengersUnqueue();
     }
@@ -31,7 +36,7 @@ public class Simulation {
         Double[] collectedByWindow = metrovia.getCollectedAmmount();
         System.out.println("Money collected by each window: ");
         for (int i = 0; i < metrovia.getWindowsNumber(); i++) {
-            System.out.println("Window " + (i+1) + ": " + collectedByWindow[i] );
+            System.out.println("Window " + (i+1) + ": $" + collectedByWindow[i] );
         }
 
 

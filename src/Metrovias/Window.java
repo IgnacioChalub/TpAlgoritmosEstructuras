@@ -10,11 +10,13 @@ public class Window {
     Double collectedAmount;
     QueueDynamic<Passenger> line;
     StackDynamic<Ticket> tickets;
+    int ticketNumber;
 
     public Window(){
         collectedAmount = 0.0;
         this.line = new QueueDynamic<>();
         this.tickets = new StackDynamic<>();
+        this.ticketNumber = 11110;
     }
     public Ticket attendPassenger(int time) {
         try {
@@ -34,7 +36,8 @@ public class Window {
     }
 
     private Integer ticketNumberGenerator() {
-        return (int) Math.random() * 100000;
+        ticketNumber++;
+        return ticketNumber;
     }
 
     public QueueDynamic<Passenger> getLine() {

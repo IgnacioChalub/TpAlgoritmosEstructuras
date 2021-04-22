@@ -16,7 +16,7 @@ public class Menu {
             windows[i] = new Window();
         }
         Metrovia metrovia = new Metrovia(windows);
-        Simulation simulation = new Simulation(metrovia, 50.0);
+        Simulation simulation = new Simulation(metrovia, 50.0, 5);
         while(true){
             int action = Scanner.getInt("Press 1 to run 30 seconds or 2 to end the simulation: ");
             if(action == 1){
