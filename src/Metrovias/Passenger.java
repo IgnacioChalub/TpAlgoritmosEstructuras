@@ -6,4 +6,8 @@ public class Passenger {
     public Passenger(Integer enterTime) {
         this.enterTime = enterTime;
     }
+
+    public Integer getEnterTime() {
+        return enterTime;
+    }
 }

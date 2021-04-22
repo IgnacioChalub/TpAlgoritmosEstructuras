@@ -1,5 +1,7 @@
 package Metrovias;
 
+import Metrovias.StackAndQueue.IsEmptyException;
+
 import java.util.Random;
 
 public class Simulation {
@@ -16,6 +18,11 @@ public class Simulation {
         time += 30;
         Passenger[] newPassengers = {new Passenger(time),new Passenger(time),new Passenger(time),new Passenger(time),new Passenger(time)};
         assignPassengers(newPassengers);
+        try {
+            passengersAttention();
+        }catch (IsEmptyException exception){
+            System.out.println(exception.getMessage());
+        }
     }
     public void endSimulation(){
         //Imprime monto total y el tiempo medio de espera de cada ventanilla.
@@ -27,5 +34,15 @@ public class Simulation {
             int windowNumber = (int) (Math.random() * amountOfWindows);
             metrovia.assignPassengerToWindow(newPassengers[i], windowNumber);
         }
+    }
+    public void passengersAttention() throws IsEmptyException {
+        for (int i = 0; i < metrovia.getWindowsNumber(); i++) {
+            if(generateNumber() < atentionProbability){
+                metrovia.attendPassengers(time,i);
+            }
+        }
+    }
+    public double generateNumber(){
+        return Math.random() * 1;
     }
 }
