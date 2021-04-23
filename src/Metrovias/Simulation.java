@@ -62,7 +62,7 @@ public class Simulation {
 
     public void assignPassengers(Passenger[] newPassengers){
         int amountOfWindows = metrovia.getWindowsNumber();
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < newPassengers.length; i++) {
             int windowNumber = (int) (Math.random() * amountOfWindows);
             metrovia.assignPassengerToWindow(newPassengers[i], windowNumber);
         }
