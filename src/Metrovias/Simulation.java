@@ -32,14 +32,14 @@ public class Simulation {
         for (int i = 0; i < metrovia.getWindowsNumber(); i++) {
             System.out.println("Window " + (i+1) + ": " + averageTimeByWindow[i]);
         }
-
+        System.out.println();
         Double[] collectedByWindow = metrovia.getCollectedAmmount();
         System.out.println("Money collected by each window: ");
         for (int i = 0; i < metrovia.getWindowsNumber(); i++) {
             System.out.println("Window " + (i+1) + ": $" + collectedByWindow[i] );
         }
-
-
+        System.out.println();
+        System.out.println("Ticket Stack: ");
         //Muestra la pila de tickets de metrovia con mostrarPila()
         try {
             showStack(metrovia.getTickets());

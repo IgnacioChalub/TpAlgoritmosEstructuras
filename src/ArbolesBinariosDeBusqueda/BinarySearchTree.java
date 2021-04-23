@@ -2,6 +2,10 @@ package ArbolesBinariosDeBusqueda;
 
 //AGREGARLE LAS EXCEPCIONES
 
+import ArbolesBinariosDeBusqueda.Exceptions.ElementNotFoundInTree;
+import ArbolesBinariosDeBusqueda.Exceptions.EmptyTreeException;
+import ArbolesBinariosDeBusqueda.Exceptions.RepeatedElementException;
+
 public class BinarySearchTree <T>{
     // Implementacion de un arbol binario de busqueda no balanceado
     // Autor Alicia Gioia
@@ -13,28 +17,33 @@ public class BinarySearchTree <T>{
     }
 
     // precondicion: elemento a insertar no pertenece al árbol
-    public void insert(Comparable <T> x){
+    public void insert(Comparable <T> x) throws RepeatedElementException {
         root = insert(root, x);
     }
 
-
     // precondicion: elemento a eliminar pertenece al árbol
-    public void delete(Comparable <T> x){
+    public void delete(Comparable <T> x) throws ElementNotFoundInTree {
         root = delete(root, x);
     }
 
     // precondicion: árbol distinto de vacío
-    public T getMin(){
+    public T getMin() throws EmptyTreeException {
+        if(root == null){
+            throw new EmptyTreeException();
+        }
         return getMin(root).value;
     }
 
     // precondicion: árbol distinto de vacío
-    public T getMax(){
+    public T getMax() throws EmptyTreeException {
+        if(root == null){
+            throw new EmptyTreeException();
+        }
         return getMax(root).value;
     }
 
     // precondicion: elemnto a buscar pertenece al arbol
-    public T search(Comparable<T> x){
+    public T search(Comparable<T> x)throws ElementNotFoundInTree{
         return search(root, x).value;
     }
 
@@ -49,19 +58,28 @@ public class BinarySearchTree <T>{
     }
 
     // precondición: árbol distino de vacío
-    public T getRoot(){
+    public T getRoot() throws EmptyTreeException {
+        if(root == null){
+            throw new EmptyTreeException();
+        }
         return root.value;
     }
 
     // precondición: árbol distino de vacío
-    public BinarySearchTree<T> getLeft(){
+    public BinarySearchTree<T> getLeft() throws EmptyTreeException {
+        if(root == null){
+            throw new EmptyTreeException();
+        }
         BinarySearchTree<T> t = new BinarySearchTree<T>();
         t.root = root.left;
         return t;
     }
 
     // precondición: árbol distino de vacío
-    public BinarySearchTree<T> getRight(){
+    public BinarySearchTree<T> getRight() throws EmptyTreeException {
+        if(root == null){
+            throw new EmptyTreeException();
+        }
         BinarySearchTree<T> t = new BinarySearchTree<T>();
         t.root = root.right;
         return t;
@@ -83,7 +101,10 @@ public class BinarySearchTree <T>{
             return getMin(t.left);
     }
 
-    private DoubleNode <T> search(DoubleNode <T> t, Comparable<T> x){
+    private DoubleNode <T> search(DoubleNode <T> t, Comparable<T> x) throws ElementNotFoundInTree {
+        if(t == null){
+            throw new ElementNotFoundInTree();
+        }
         if (x.compareTo(t.value)== 0)
             return t;
         else if (x.compareTo( t.value)< 0)
@@ -104,9 +125,12 @@ public class BinarySearchTree <T>{
     }
 
 
-    private DoubleNode<T> insert (DoubleNode <T> t, Comparable <T> x) {
+    private DoubleNode<T> insert (DoubleNode <T> t, Comparable <T> x) throws RepeatedElementException {
         if (t == null){
             t = new DoubleNode<T>((T) x);
+        }
+        else if(x.compareTo(t.value) == 0){
+            throw new RepeatedElementException();
         }
         else if (x.compareTo(t.value) < 0)
             t.left = insert(t.left, x);
@@ -116,7 +140,10 @@ public class BinarySearchTree <T>{
     }
 
 
-    private DoubleNode<T> delete (DoubleNode<T> t, Comparable<T> x) {
+    private DoubleNode<T> delete (DoubleNode<T> t, Comparable<T> x) throws ElementNotFoundInTree {
+        if(t == null){
+            throw new ElementNotFoundInTree();
+        }
         if (x.compareTo(t.value) < 0)
             t.left = delete(t.left, x);
         else if (x.compareTo(t.value) > 0)
