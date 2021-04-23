@@ -16,12 +16,16 @@ public class Menu {
             windows[i] = new Window();
         }
         Metrovia metrovia = new Metrovia(windows);
-        Simulation simulation = new Simulation(metrovia, 40.0, 10);
+        Simulation simulation = new Simulation(metrovia, 5.0, 100);
         while(true){
+            for (int i = 0; i < 900; i++) {
+                simulation.run30seconds();
+            }
             int action = Scanner.getInt("Press 1 to run 30 seconds or 2 to end the simulation: ");
             if(action == 1){
                 simulation.run30seconds();
             }else if(action == 2){
+                System.out.println("Time simulated: " + simulation.time + " seconds (" + simulation.time/3600 + " hours)");
                 simulation.endSimulation();
                 System.exit(0);
             }
