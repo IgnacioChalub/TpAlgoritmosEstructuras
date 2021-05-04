@@ -26,6 +26,6 @@ public class Organism implements Comparable<Organism> {
         this.description = description;
     }
     public String toString(){
-        return code + " " + type + " " + description;
+        return code + " - " + type +  " - " + description +" - size: " + size;
     }
 }

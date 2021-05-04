@@ -25,6 +25,10 @@ public class ABM{
         data.search(new Organism(code)).changeDescripion(description);
     }
     public void informe() throws EmptyTreeException {
+        if (data.isEmpty()){
+            System.out.println("Informe vacio - Inserte organismos");
+            return;
+        }
         ArBinApi<Organism> api = new ArBinApi<>();
         api.inorden(data);
     }
