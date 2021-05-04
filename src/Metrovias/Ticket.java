@@ -1,5 +1,5 @@
 package Metrovias;
-
+//Authors: Ignacio Chalub, Mateo Valle and Matias Coulougian.
 public class Ticket {
     private Integer ticketNumber;
     private Integer attentionTime;

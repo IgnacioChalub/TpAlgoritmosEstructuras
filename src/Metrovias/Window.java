@@ -1,10 +1,9 @@
 package Metrovias;
-
+//Authors: Ignacio Chalub, Mateo Valle and Matias Coulougian.
 import Metrovias.StackAndQueue.IsEmptyException;
 import Metrovias.StackAndQueue.QueueDynamic;
 import Metrovias.StackAndQueue.StackDynamic;
 
-import java.util.Random;
 
 public class Window {
     Double collectedAmount;

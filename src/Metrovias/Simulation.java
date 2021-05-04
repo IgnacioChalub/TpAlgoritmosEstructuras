@@ -3,6 +3,8 @@ package Metrovias;
 import Metrovias.StackAndQueue.StackDynamic;
 import Metrovias.StackAndQueue.IsEmptyException;
 
+//Authors: Ignacio Chalub, Mateo Valle and Matias Coulougian.
+
 public class Simulation {
     Metrovia metrovia;
     Double atentionProbability;
@@ -15,7 +17,7 @@ public class Simulation {
         time = 0;
         this.passengersIn30seconds = passengersIn30seconds;
     }
-    public void run30seconds(){
+    public void run30seconds(){//runs 30 seconds of simulation (5 passengers go to the windows they choose and some of the passengers in the front of the queue buy their ticket and leave the queue)
         time += 30;
         Passenger[] newPassengers = new Passenger[passengersIn30seconds];
         for (int i = 0; i < passengersIn30seconds; i++) {
@@ -26,7 +28,7 @@ public class Simulation {
     }
 
     public void endSimulation(){
-        //Imprime monto total y el tiempo medio de espera de cada ventanilla.
+        //Prints the total amount collected by each window, shows window's average times and prints the ticket stack
         Double[] averageTimeByWindow = metrovia.getWindowsAvgTime();
         System.out.println("Average wait time for each window (in seconds): ");
         for (int i = 0; i < metrovia.getWindowsNumber(); i++) {
@@ -40,7 +42,7 @@ public class Simulation {
         }
         System.out.println();
         System.out.println("Ticket Stack: ");
-        //Muestra la pila de tickets de metrovia con mostrarPila()
+        //Shows the ticket stack with "mostrarPila()"
         try {
             showStack(metrovia.getTickets());
         } catch (IsEmptyException e) {
