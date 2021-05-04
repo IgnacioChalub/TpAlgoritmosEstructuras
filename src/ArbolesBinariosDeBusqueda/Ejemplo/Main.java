@@ -1,5 +1,6 @@
 package ArbolesBinariosDeBusqueda.Ejemplo;
 
+import ArbolesBinariosDeBusqueda.ArBinApi;
 import ArbolesBinariosDeBusqueda.BinarySearchTree;
 import ArbolesBinariosDeBusqueda.Exceptions.EmptyTreeException;
 import ArbolesBinariosDeBusqueda.Exceptions.RepeatedElementException;

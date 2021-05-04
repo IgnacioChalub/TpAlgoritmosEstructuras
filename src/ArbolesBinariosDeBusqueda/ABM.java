@@ -1,8 +1,5 @@
 package ArbolesBinariosDeBusqueda;
 
-import ArbolesBinarios.TreeApi;
-import ArbolesBinariosDeBusqueda.Ejemplo.ArBinApi;
-import ArbolesBinariosDeBusqueda.Ejemplo.Estudiante;
 import ArbolesBinariosDeBusqueda.Exceptions.ElementNotFoundInTree;
 import ArbolesBinariosDeBusqueda.Exceptions.EmptyTreeException;
 import ArbolesBinariosDeBusqueda.Exceptions.RepeatedElementException;

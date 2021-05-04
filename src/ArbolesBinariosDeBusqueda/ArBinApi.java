@@ -1,4 +1,4 @@
-package ArbolesBinariosDeBusqueda.Ejemplo;
+package ArbolesBinariosDeBusqueda;
 
 import ArbolesBinariosDeBusqueda.BinarySearchTree;
 import ArbolesBinariosDeBusqueda.Exceptions.EmptyTreeException;

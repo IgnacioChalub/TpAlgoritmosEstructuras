@@ -15,7 +15,7 @@ public class Main {
         Organism g = new Organism("BAAA", "Planta", "...", 10);
         Organism h = new Organism("XAXF", "Planta", "...", 50);
 
-        Organism[] organismsList = {d, h, c, a, e, g, f, b};
+        Organism[] organismsList = {d, h, c, a, e, g, f, b}; //Array is used to store the organisms and then pass them to the tree.
         ABM abm = new ABM();
         try {
             abm.listToTree(organismsList);
