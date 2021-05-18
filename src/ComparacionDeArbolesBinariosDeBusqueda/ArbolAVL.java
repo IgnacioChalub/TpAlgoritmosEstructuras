@@ -3,18 +3,15 @@ package ComparacionDeArbolesBinariosDeBusqueda;
 //AGREGARLE LAS EXCEPCIONES
 
 
-import ArbolesBinarios.BinaryTree;
 import ComparacionDeArbolesBinariosDeBusqueda.Exceptions.ElementNotFoundInTree;
 import ComparacionDeArbolesBinariosDeBusqueda.Exceptions.EmptyTreeException;
 import ComparacionDeArbolesBinariosDeBusqueda.Exceptions.RepeatedElementException;
+import ComparacionDeArbolesBinariosDeBusqueda.Stack.IsEmptyException;
 import ComparacionDeArbolesBinariosDeBusqueda.Stack.StackDynamic;
 
 public class ArbolAVL <T>{
-    // Implementacion de un arbol binario de busqueda no balanceado
-    // Autor Alicia Gioia
-
     private DoubleNode<T> root;
-    private StackDynamic<T> insertionStack;
+    private StackDynamic<DoubleNode<T>> insertionStack;
 
     public ArbolAVL(){
         this.root = null;
@@ -24,14 +21,58 @@ public class ArbolAVL <T>{
     // precondicion: elemento a insertar no pertenece al árbol
     public void insert(Comparable <T> x) throws RepeatedElementException {
         root = insert(root, x);
-    }
-
-    private void balanceTree(){
-        while(!insertionStack.isEmpty()){
-
+        try {
+            balanceTree(x);
+        } catch (EmptyTreeException e) {
+            e.printStackTrace();
+        } catch (IsEmptyException e) {
+            e.printStackTrace();
         }
     }
 
+    private void balanceTree(Comparable <T> x) throws EmptyTreeException, IsEmptyException {
+        while(!insertionStack.isEmpty()){
+            if(!isBalanced(insertionStack.peek())){
+                DoubleNode<T> unbalanced = insertionStack.peek();
+                if(x.compareTo(unbalanced.value) > 0 && x.compareTo(unbalanced.right.value) < 0) {//Chequeo condicion de rotacion doble a derecha
+                    doubleRotationRight(x, unbalanced);
+                }
+                else if(x.compareTo(unbalanced.value) < 0 && x.compareTo(unbalanced.left.value) > 0) {//Chequeo condicion de rotacion doble a izquierda
+                    doubleRotationLeft(x,unbalanced);
+                }
+                else if(x.compareTo(unbalanced.value) < 0){
+                    DoubleNode<T> newRoot = rotateWithLeftChild(unbalanced);
+                    changeUnbalancedFathersChild(x,newRoot);
+                }
+                else{
+                    DoubleNode<T> newRoot = rotateWithRightChild(unbalanced);
+                    changeUnbalancedFathersChild(x,newRoot);
+                }
+            }
+            insertionStack.pop();
+        }
+    }
+
+    private void doubleRotationRight(Comparable<T> x, DoubleNode<T> unbalanced) throws IsEmptyException {
+            DoubleNode<T> newRoot = doubleWithRightChild(unbalanced);
+            insertionStack.pop();
+            changeUnbalancedFathersChild(x, newRoot);
+    }
+    private void doubleRotationLeft(Comparable<T> x,DoubleNode<T> unbalanced) throws IsEmptyException {
+            DoubleNode<T> newRoot = doubleWithLeftChild(unbalanced);
+            insertionStack.pop();
+            changeUnbalancedFathersChild(x, newRoot);
+    }
+    private void changeUnbalancedFathersChild(Comparable<T> x, DoubleNode<T> newRoot){
+        if(!insertionStack.isEmpty()){
+            if(x.compareTo(insertionStack.peek().value) > 0){
+                insertionStack.peek().right = newRoot;
+            }
+            else{
+                insertionStack.peek().left = newRoot;
+            }
+        }
+    }
     // precondicion: elemento a eliminar pertenece al árbol
     public void delete(Comparable <T> x) throws ElementNotFoundInTree {
         root = delete(root, x);
@@ -141,35 +182,79 @@ public class ArbolAVL <T>{
         } else if(x.compareTo(t.value) == 0){
             throw new RepeatedElementException();
         } else if (x.compareTo(t.value) < 0) {
-            insertionStack.stack((T) t);
+            insertionStack.stack(t);
             t.left = insert(t.left, x);
         } else {
-            insertionStack.stack((T) t);
+            insertionStack.stack(t);
             t.right = insert(t.right, x);
         }
         return t;
     }
 
-    private boolean isBalanced() throws EmptyTreeException {
-        if(height(getLeft()) - height(getRight()) > 2 || height(getLeft()) - height(getRight()) < -2){
+    private boolean isBalanced(DoubleNode<T> n) throws EmptyTreeException {
+        if(height(n.left) - height(n.right) > 2 || height(n.left) - height(n.right) < -2){
             return false;
         }
         return true;
     }
 
-    private int height(ArbolAVL<T> a) throws EmptyTreeException {
-        return heightAux(a) - 1;
+    private int height(DoubleNode<T> n) throws EmptyTreeException {
+        return heightAux(n) - 1;
     }
 
-    private int heightAux(ArbolAVL<T> a) throws EmptyTreeException {//returns the longest path in the tree
-        if (a.isEmpty()) {
+    private int heightAux(DoubleNode<T> n) throws EmptyTreeException {//returns the longest path in the tree
+        if (n.left == null && n.right == null) {
             return 0;
         }
-        if (heightAux(a.getLeft()) > heightAux(a.getRight())) {
-            return 1 + heightAux(a.getLeft());
+        if (heightAux(n.left) > heightAux(n.right)){
+            return 1 + heightAux(n.left);
         }
-        return 1 + heightAux(a.getRight());
+        return 1 + heightAux(n.right);
     }
+
+    /**Rotate binary tree node with left child.
+       // For AVL trees, this is a single rotation for case 1.
+     */
+
+    private static DoubleNode rotateWithLeftChild(DoubleNode y){
+        DoubleNode x = y.left;
+        y.left = x.right;
+        x.right = y;
+        return x;
+    }
+    /**
+     * Rotate binary tree node with right child.
+     * For AVL trees, this is a single rotation for case 4.
+     */
+
+    private static DoubleNode rotateWithRightChild( DoubleNode y) {
+        DoubleNode x = y.right;
+        y.right = x.left;
+        x.left = y;
+        return x;
+    }
+
+    /**
+     * Double rotate binary tree node: first left child
+     * with its right child; then node k3 with new left child.
+     * For AVL trees, this is a double rotation for case 2.
+     */
+    private static DoubleNode doubleWithLeftChild( DoubleNode y) {
+        y.left = rotateWithRightChild(y.left);
+        return rotateWithLeftChild(y);
+    }
+
+    /**
+     * Double rotate binary tree node: first right child
+     * with its left child; then node k1 with new right child.
+     * For AVL trees, this is a double rotation for case 3.
+     */
+    private static DoubleNode doubleWithRightChild(DoubleNode y) {
+        y.right = rotateWithLeftChild(y.right);
+        return rotateWithRightChild(y);
+    }
+
+
 
     private DoubleNode<T> delete (DoubleNode<T> t, Comparable<T> x) throws ElementNotFoundInTree {
         if(t == null){
