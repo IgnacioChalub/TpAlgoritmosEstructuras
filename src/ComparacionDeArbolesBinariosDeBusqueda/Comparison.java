@@ -21,7 +21,7 @@ public class Comparison {
 
         int comparisons = 0;
         for (int i = 0; i < 10; i++) {
-            int randomInt = (int) Math.random()*1000;
+            int randomInt = (int) (Math.random()*1000);
             try {
                 comparisons += binarySearchTree.searchCountingComparisons(intArray[i*100]);
             } catch (ElementNotFoundInTree elementNotFoundInTree) {
@@ -35,7 +35,7 @@ public class Comparison {
     public static int[] generateRandomArray(){
         int[] newArray = new int[1000];
         for (int i = 0; i < newArray.length; i++) {
-            newArray[i] = (int) Math.random()*100000;
+            newArray[i] = (int) (Math.random()*100000);
         }
         return newArray;
     }

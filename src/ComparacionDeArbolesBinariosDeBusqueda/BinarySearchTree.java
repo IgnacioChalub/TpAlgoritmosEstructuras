@@ -53,15 +53,16 @@ public class BinarySearchTree<T>{
     }
 
     private int searchCountingComparisons(DoubleNode<T> t, Comparable<T> x, int count) throws ElementNotFoundInTree {
+        count = count+1;
         if(t == null){
             throw new ElementNotFoundInTree();
         }
         if (x.compareTo(t.value)== 0)
             return count;
         else if (x.compareTo( t.value)< 0)
-            return searchCountingComparisons(t.left,x,++count);
+            return searchCountingComparisons(t.left,x,count);
         else
-            return searchCountingComparisons(t.left,x,++count);
+            return searchCountingComparisons(t.right,x,count);
     }
 
     // precondicion: -
