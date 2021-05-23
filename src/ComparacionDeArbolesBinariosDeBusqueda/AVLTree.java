@@ -9,11 +9,11 @@ import ComparacionDeArbolesBinariosDeBusqueda.Exceptions.RepeatedElementExceptio
 import ComparacionDeArbolesBinariosDeBusqueda.Stack.IsEmptyException;
 import ComparacionDeArbolesBinariosDeBusqueda.Stack.StackDynamic;
 
-public class ArbolAVL <T>{
+public class AVLTree<T>{
     private DoubleNode<T> root;
     private StackDynamic<DoubleNode<T>> insertionStack;
 
-    public ArbolAVL(){
+    public AVLTree(){
         this.root = null;
         this.insertionStack = new StackDynamic<>();
     }
@@ -34,35 +34,28 @@ public class ArbolAVL <T>{
         while(!insertionStack.isEmpty()){
             if(!isBalanced(insertionStack.peek())){
                 DoubleNode<T> unbalanced = insertionStack.peek();
+                DoubleNode<T> newRoot;
                 if(x.compareTo(unbalanced.value) > 0 && x.compareTo(unbalanced.right.value) < 0) {//Chequeo condicion de rotacion doble a derecha
-                    doubleRotationRight(x, unbalanced);
+                    newRoot = doubleWithRightChild(unbalanced);
                 }
                 else if(x.compareTo(unbalanced.value) < 0 && x.compareTo(unbalanced.left.value) > 0) {//Chequeo condicion de rotacion doble a izquierda
-                    doubleRotationLeft(x,unbalanced);
+                    newRoot = doubleWithLeftChild(unbalanced);
                 }
                 else if(x.compareTo(unbalanced.value) < 0){
-                    DoubleNode<T> newRoot = rotateWithLeftChild(unbalanced);
-                    changeUnbalancedFathersChild(x,newRoot);
+                    newRoot = rotateWithLeftChild(unbalanced);
                 }
                 else{
-                    DoubleNode<T> newRoot = rotateWithRightChild(unbalanced);
-                    changeUnbalancedFathersChild(x,newRoot);
+                    newRoot = rotateWithRightChild(unbalanced);
                 }
+                insertionStack.pop();
+                changeUnbalancedFathersChild(x, newRoot);
+            } else {
+                insertionStack.pop();
             }
-            insertionStack.pop();
+
         }
     }
 
-    private void doubleRotationRight(Comparable<T> x, DoubleNode<T> unbalanced) throws IsEmptyException {
-            DoubleNode<T> newRoot = doubleWithRightChild(unbalanced);
-            insertionStack.pop();
-            changeUnbalancedFathersChild(x, newRoot);
-    }
-    private void doubleRotationLeft(Comparable<T> x,DoubleNode<T> unbalanced) throws IsEmptyException {
-            DoubleNode<T> newRoot = doubleWithLeftChild(unbalanced);
-            insertionStack.pop();
-            changeUnbalancedFathersChild(x, newRoot);
-    }
     private void changeUnbalancedFathersChild(Comparable<T> x, DoubleNode<T> newRoot){
         if(!insertionStack.isEmpty()){
             if(x.compareTo(insertionStack.peek().value) > 0){
@@ -71,7 +64,10 @@ public class ArbolAVL <T>{
             else{
                 insertionStack.peek().left = newRoot;
             }
+        } else {
+            root = newRoot;
         }
+
     }
     // precondicion: elemento a eliminar pertenece al árbol
     public void delete(Comparable <T> x) throws ElementNotFoundInTree {
@@ -118,21 +114,21 @@ public class ArbolAVL <T>{
     }
 
     // precondición: árbol distino de vacío
-    public ArbolAVL<T> getLeft() throws EmptyTreeException {
+    public AVLTree<T> getLeft() throws EmptyTreeException {
         if(root == null){
             throw new EmptyTreeException();
         }
-        ArbolAVL<T> t = new ArbolAVL<T>();
+        AVLTree<T> t = new AVLTree<T>();
         t.root = root.left;
         return t;
     }
 
     // precondición: árbol distino de vacío
-    public ArbolAVL<T> getRight() throws EmptyTreeException {
+    public AVLTree<T> getRight() throws EmptyTreeException {
         if(root == null){
             throw new EmptyTreeException();
         }
-        ArbolAVL<T> t = new ArbolAVL<T>();
+        AVLTree<T> t = new AVLTree<T>();
         t.root = root.right;
         return t;
     }
@@ -192,17 +188,20 @@ public class ArbolAVL <T>{
     }
 
     private boolean isBalanced(DoubleNode<T> n) throws EmptyTreeException {
-        if(height(n.left) - height(n.right) > 2 || height(n.left) - height(n.right) < -2){
+        if(height(n.left) - height(n.right) >= 2 || height(n.left) - height(n.right) <= -2){
             return false;
         }
         return true;
     }
 
     private int height(DoubleNode<T> n) throws EmptyTreeException {
-        return heightAux(n) - 1;
+        return heightAux(n);
     }
 
     private int heightAux(DoubleNode<T> n) throws EmptyTreeException {//returns the longest path in the tree
+        if (n == null){
+            return -1;
+        }
         if (n.left == null && n.right == null) {
             return 0;
         }

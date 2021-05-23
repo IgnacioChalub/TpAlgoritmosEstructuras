@@ -12,6 +12,5 @@ public class DoubleNode<T>{
         this.value = o;
         this.left = left;
         this.right = right;
-
     }
 }
