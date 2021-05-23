@@ -8,8 +8,8 @@ public class AVLTest {
         try {
             avl.insert(2);
             avl.insert(4);
+            avl.insert(6);
             avl.insert(1);
-            avl.insert(8);
         } catch (RepeatedElementException e) {
             e.printStackTrace();
         }

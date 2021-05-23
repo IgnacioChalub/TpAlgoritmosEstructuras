@@ -32,13 +32,24 @@ public class RedBlackTree<T> {
         if (node == TNULL || key.equals(node.data)) {
             return node;
         }
-
         if (key.compareTo((T) node.data) < 0) {
             return searchTreeHelper(node.left, key);
         }
         return searchTreeHelper(node.right, key);
     }
-
+    public int searchCountingComparisons(Comparable<T> key){
+        return searchCountingComparisons(root, key, 1);
+    }
+    public int searchCountingComparisons(RedBlackNode node, Comparable<T> key, int count){
+        count++;
+        if (node == TNULL || key.equals(node.data)) {
+            return count;
+        }
+        if (key.compareTo((T) node.data) < 0) {
+            return searchCountingComparisons(node.left, key, count);
+        }
+        return searchCountingComparisons(node.right, key, count);
+    }
     // fix the rb tree modified by the delete operation
     private void fixDelete(RedBlackNode x) {
         RedBlackNode s;

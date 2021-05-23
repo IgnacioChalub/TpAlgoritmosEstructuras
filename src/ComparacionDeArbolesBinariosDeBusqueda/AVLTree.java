@@ -282,4 +282,20 @@ public class AVLTree<T>{
             t = t.right;
         return t;
     }
+    public int searchCountingComparisons(Comparable<T> x) throws ElementNotFoundInTree {
+        return searchCountingComparisons(root,x,1);
+    }
+
+    private int searchCountingComparisons(DoubleNode<T> t, Comparable<T> x, int count) throws ElementNotFoundInTree {
+        count = count+1;
+        if(t == null){
+            throw new ElementNotFoundInTree();
+        }
+        if (x.compareTo(t.value)== 0)
+            return count;
+        else if (x.compareTo( t.value)< 0)
+            return searchCountingComparisons(t.left,x,count);
+        else
+            return searchCountingComparisons(t.right,x,count);
+    }
 }

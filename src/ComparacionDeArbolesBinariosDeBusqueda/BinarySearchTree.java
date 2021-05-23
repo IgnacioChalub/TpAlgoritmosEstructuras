@@ -48,7 +48,6 @@ public class BinarySearchTree<T>{
     }
 
     public int searchCountingComparisons(Comparable<T> x) throws ElementNotFoundInTree {
-        System.out.println(searchCountingComparisons(root,x,0));
         return searchCountingComparisons(root,x,1);
     }
 
