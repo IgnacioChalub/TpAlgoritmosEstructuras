@@ -48,6 +48,7 @@ public class BinarySearchTree<T>{
     }
 
     public int searchCountingComparisons(Comparable<T> x) throws ElementNotFoundInTree {
+        System.out.println(searchCountingComparisons(root,x,0));
         return searchCountingComparisons(root,x,1);
     }
 
@@ -59,9 +60,9 @@ public class BinarySearchTree<T>{
         if (x.compareTo(t.value)== 0)
             return count;
         else if (x.compareTo( t.value)< 0)
-            return searchCountingComparisons(t.left,x,count);
+            return searchCountingComparisons(t.left,x,++count);
         else
-            return searchCountingComparisons(t.right,x,count);
+            return searchCountingComparisons(t.left,x,++count);
     }
 
     // precondicion: -
@@ -100,6 +101,23 @@ public class BinarySearchTree<T>{
         BinarySearchTree<T> t = new BinarySearchTree<T>();
         t.root = root.right;
         return t;
+    }
+
+    public int treeHeight() {
+        return heightAux(root);
+    }
+
+    private int heightAux(DoubleNode<T> n) {//returns the longest path in the tree
+        if (n == null){
+            return -1;
+        }
+        if (n.left == null && n.right == null) {
+            return 0;
+        }
+        if (heightAux(n.left) > heightAux(n.right)){
+            return 1 + heightAux(n.left);
+        }
+        return 1 + heightAux(n.right);
     }
 
 

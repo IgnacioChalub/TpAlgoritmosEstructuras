@@ -194,11 +194,15 @@ public class AVLTree<T>{
         return true;
     }
 
-    private int height(DoubleNode<T> n) throws EmptyTreeException {
+    public int treeHeight() {
+        return height(root);
+    }
+
+    private int height(DoubleNode<T> n) {
         return heightAux(n);
     }
 
-    private int heightAux(DoubleNode<T> n) throws EmptyTreeException {//returns the longest path in the tree
+    private int heightAux(DoubleNode<T> n) {//returns the longest path in the tree
         if (n == null){
             return -1;
         }

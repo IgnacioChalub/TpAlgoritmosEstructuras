@@ -151,10 +151,13 @@ public class Comparison {
                 int searchingIndex = i*100;
                 try {
                     int bstComp = bst.searchCountingComparisons(elements[searchingIndex]);
+                    bstHeight = bstHeight + bst.treeHeight();
                     bstTries+=bstComp;
                     int avlComp = avl.searchCountingComparisons(elements[searchingIndex]);
+                    avlHeight = avlHeight + avl.treeHeight();
                     avlTries+=avlComp;
                     int rbtComp = rbt.searchCountingComparisons(elements[searchingIndex]);
+                    rbtHeight = rbtHeight + rbt.treeHeight();
                     rbtTries+=rbtComp;
                 } catch (ElementNotFoundInTree elementNotFoundInTree) {
                     System.out.println(elementNotFoundInTree.getMessage());
@@ -165,6 +168,8 @@ public class Comparison {
         System.out.println("BINARY SEARCH TREE MEANS- " + "Construction time: " + bstTime/10 + " Height: " + bstHeight/10 + " Search tries: " + bstTries/10);
         System.out.println("AVL TREE MEANS- " + "Construction time: " + avlTime/10 + " Height: " + avlHeight/10 + " Search tries: " + avlTries/10);
         System.out.println("RED BLACK TREE MEANS- " + "Construction time: " + rbtTime/10 + " Height: " + rbtHeight/10 + " Search tries: " + rbtTries/10);
+
+
 
     }
 

@@ -1,5 +1,7 @@
 package ComparacionDeArbolesBinariosDeBusqueda;
 
+import ComparacionDeArbolesBinariosDeBusqueda.Exceptions.EmptyTreeException;
+
 public class RedBlackTree<T> {
     private RedBlackNode root;
     private RedBlackNode TNULL;
@@ -440,5 +442,22 @@ public class RedBlackTree<T> {
         RedBlackTree<T> t = new RedBlackTree<T>();
         t.root = root.right;
         return t;
+    }
+
+    public int treeHeight() {
+        return heightAux(root);
+    }
+
+    private int heightAux(RedBlackNode<T> n) {//returns the longest path in the tree
+        if (n == null){
+            return -1;
+        }
+        if (n.left == null && n.right == null) {
+            return 0;
+        }
+        if (heightAux(n.left) > heightAux(n.right)){
+            return 1 + heightAux(n.left);
+        }
+        return 1 + heightAux(n.right);
     }
 }
