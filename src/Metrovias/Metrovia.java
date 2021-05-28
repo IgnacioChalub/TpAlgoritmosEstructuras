@@ -24,7 +24,6 @@ public class Metrovia {
             tickets.stack(windows[windowNumber].attendPassenger(time));
         }
     }
-
     public Double[] getCollectedAmmount(){
         Double[] collectedByWindow = new Double[windows.length];
         for (int i = 0; i < windows.length; i++) {

@@ -48,8 +48,7 @@ public class BinarySearchTree<T>{
     }
 
     public int searchCountingComparisons(Comparable<T> x) throws ElementNotFoundInTree {
-        System.out.println(searchCountingComparisons(root,x,0));
-        return searchCountingComparisons(root,x,1);
+        return searchCountingComparisons(root,x,0);
     }
 
     private int searchCountingComparisons(DoubleNode<T> t, Comparable<T> x, int count) throws ElementNotFoundInTree {
@@ -59,10 +58,10 @@ public class BinarySearchTree<T>{
         }
         if (x.compareTo(t.value)== 0)
             return count;
-        else if (x.compareTo( t.value)< 0)
+        else if (x.compareTo( t.value) < 0)
             return searchCountingComparisons(t.left,x,++count);
         else
-            return searchCountingComparisons(t.left,x,++count);
+            return searchCountingComparisons(t.right,x,++count);
     }
 
     // precondicion: -
