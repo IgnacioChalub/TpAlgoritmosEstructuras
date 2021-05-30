@@ -7,31 +7,35 @@ public class FileManager {
 
     public static void main(String[] args) throws IOException {
 
-        SalesFile salesFile = new SalesFile("SalesFile");
-        DestinyFile destinyFile = new DestinyFile("DestinyFile");
+        //SalesFile salesFile = new SalesFile("SalesFile");
+        //DestinyFile destinyFile = new DestinyFile("DestinyFile");
         PriceFile priceFile = new PriceFile("PriceFile");
 
         /*Sale[] salesArray = randomSalesArray();
-        if(salesFile.isEmpty())
+        if(salesFile.isEmpty()){
         for (int i = 0; i < salesArray.length; i++) {
             salesFile.write(salesArray[i]);
         }
+        }
 
         Sale[] allSales = salesFile.list();
-        System.out.println("hey");*/
-
+        System.out.println("hey");
+*/
         Price[] priceArray = createPriceArray();
-        if (priceFile.isEmpty()){
+        priceFile.seek(4);
             for (int i = 0; i < priceArray.length; i++) {
                 priceFile.write(priceArray[i]);
             }
-        }
-
-        Price[] allPrice = priceFile.list();
+        //Price[] allPrice = priceFile.list();
+        priceFile.seek(0);
+        System.out.println(priceFile.readOneRegister());
+        priceFile.list();
+        System.out.println("hey");
+        /*Price[] allPrice = priceFile.list();
         System.out.println("xd");
         salesFile.close();
         destinyFile.close();
-        priceFile.close();
+        priceFile.close();*/
     }
 
     private static Price[] createPriceArray() {
@@ -51,7 +55,7 @@ public class FileManager {
     }
 
     static Sale createRandomSale(){
-        return new Sale(randomString(3),randomString(5),(int)randDouble(1,1000),randDouble(1,1000), (int) randDouble(1,31),(int) randDouble(1,13), 2012);
+        return new Sale(randomString(3),randomString(5),(int)randDouble(1,1000),randDouble(1,1000), (int) randDouble(1,31),(int) randDouble(1,13), (int)2012);
     }
 
     public static double randDouble(double bound1, double bound2) {

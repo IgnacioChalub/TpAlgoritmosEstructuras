@@ -5,7 +5,7 @@ import java.io.IOException;
 
 public class DestinyFile extends GenericFile{
 
-    public DestinyFile(String fileName) throws FileNotFoundException {
+    public DestinyFile(String fileName) throws IOException {
         super(fileName);
     }
 
