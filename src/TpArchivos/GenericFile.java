@@ -16,8 +16,9 @@ public abstract class GenericFile {
         try {
             raf.seek(0);
             this.regAmount = raf.readInt();
-        } catch (IOException e) {
+        } catch (Exception e) {
             this.regAmount = 0;
+
         }
     }
 
@@ -29,6 +30,9 @@ public abstract class GenericFile {
         return regAmount;
     }
 
+    public void seek(int i) throws IOException {
+        raf.seek(i);
+    }
 
     public void updateRegAmount() throws IOException {
         regAmount++;
