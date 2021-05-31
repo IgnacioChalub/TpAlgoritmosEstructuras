@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.io.RandomAccessFile;
 
 public abstract class GenericFile {
-
     File file;
     RandomAccessFile raf;
     int regAmount;
@@ -35,11 +34,14 @@ public abstract class GenericFile {
         regAmount++;
         raf.seek(0);
         raf.writeInt(regAmount);
-        raf.seek(file.length()-1);
+        raf.seek(file.length());
     }
 
     public boolean isEmpty(){
         return regAmount == 0;
+    }
+    public void seekFirstRegPosition() throws IOException {
+        raf.seek(4);
     }
 
 

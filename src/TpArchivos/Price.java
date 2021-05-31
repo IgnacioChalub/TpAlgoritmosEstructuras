@@ -3,9 +3,9 @@ package TpArchivos;
 public class Price {
 
     private int month;
-    private int dolarPrice;
+    private double dolarPrice;
 
-    public Price(int month, int dolarPrice){
+    public Price(int month, double dolarPrice){
         this.month = month;
         this.dolarPrice = dolarPrice;
     }
@@ -14,7 +14,7 @@ public class Price {
         return month;
     }
 
-    public int getDolarPrice() {
+    public double getDolarPrice() {
         return dolarPrice;
     }
 }

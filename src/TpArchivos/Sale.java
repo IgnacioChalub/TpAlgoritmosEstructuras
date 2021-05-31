@@ -1,6 +1,6 @@
 package TpArchivos;
 
-public class Sale {
+public class Sale implements Comparable<Sale> {
 
     private String destinyCode;
     private String articleCode;
@@ -46,5 +46,10 @@ public class Sale {
 
     public int getYear() {
         return year;
+    }
+
+    @Override
+    public int compareTo(Sale o) {
+        return destinyCode.compareTo(o.destinyCode);
     }
 }

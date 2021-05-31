@@ -9,21 +9,21 @@ public class DestinyFile extends GenericFile{
         super(fileName);
     }
 
-    public void writeDestiny(Destiny destiny) throws IOException {
+    public void write(Destiny destiny) throws IOException {
         raf.writeUTF(destiny.getDestinyCode());
         raf.writeUTF(destiny.getDescription());
         updateRegAmount();
     }
     public Destiny[] list() throws IOException {
-        raf.seek(0);
-        Destiny[] destinyArray = new Destiny[getRegAmount()];
-        for (int i = 0; i < getRegAmount(); i++) {
-            destinyArray[i] = ReadOneRegister();
+        raf.seek(4);
+        Destiny[] destinyArray = new Destiny[regAmount];
+        for (int i = 0; i < regAmount; i++) {
+            destinyArray[i] = readOneRegister();
         }
         return destinyArray;
     }
 
-    public Destiny ReadOneRegister() throws IOException {
+    public Destiny readOneRegister() throws IOException {
         return new Destiny(raf.readUTF(),raf.readUTF());
     }
 }

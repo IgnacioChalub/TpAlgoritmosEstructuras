@@ -20,8 +20,8 @@ public class SalesFile extends GenericFile{
     }
     public Sale[] list() throws IOException {
         raf.seek(4); //va a 4 pq el primer int es el reg amount
-        Sale[] saleArray = new Sale[getRegAmount()];
-        for (int i = 0; i < getRegAmount(); i++) {
+        Sale[] saleArray = new Sale[regAmount];
+        for (int i = 0; i < regAmount; i++) {
             saleArray[i] = readOneRegister();
         }
         return saleArray;

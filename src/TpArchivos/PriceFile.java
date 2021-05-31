@@ -10,21 +10,21 @@ public class PriceFile extends GenericFile{
 
     public void write(Price price) throws IOException {
         raf.writeInt(price.getMonth());
-        raf.writeInt(price.getDolarPrice());
+        raf.writeDouble(price.getDolarPrice());
         updateRegAmount();
     }
 
     public Price[] list() throws IOException {
         raf.seek(4);
-        Price[] priceArray = new Price[getRegAmount()];
-        for (int i = 0; i < getRegAmount()-1; i++) {
+        Price[] priceArray = new Price[regAmount];
+        for (int i = 0; i < regAmount; i++) {
             priceArray[i] = readOneRegister();
         }
         return priceArray;
     }
 
     public Price readOneRegister() throws IOException {
-        return new Price(raf.readInt(),raf.readInt());
+        return new Price(raf.readInt(),raf.readDouble());
     }
 
 }
