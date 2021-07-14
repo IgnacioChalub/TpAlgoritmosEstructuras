@@ -2,7 +2,6 @@ package TablasDeDispersion;
 
 public class Word implements Hashable{
     String word;
-    String hash;
 
     public Word(String word) {
         this.word = word;
@@ -27,7 +26,6 @@ public class Word implements Hashable{
                 return "";
         }
     }
-
     @Override
     public int hash(int M){
         String code, previous, soundex;
